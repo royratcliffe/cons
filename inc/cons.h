@@ -24,14 +24,14 @@ struct cons;
  * cells in the list. This convention simplifies list operations, such as
  * traversal and manipulation, by providing a clear termination point for the
  * list.
- * \note A cons cell, the fundamental building block of linked lists in Lisp-like languages.
- * A cons cell is a simple data structure that contains two fields: car
- * and cdr. The car field can hold any type of data, and the cdr field points to
- * the next cons cell in the list. This allows us to create linked lists of
- * arbitrary length. The CONS macro provides a convenient way to create cons
- * cells, and the CONS_NIL macro represents the empty list. The CONS_NIL_P and
- * CONS_NOT_NIL_P macros are utility functions for checking if a cons cell is
- * the empty list or not.
+ * \note A cons cell, the fundamental building block of linked lists in
+ * Lisp-like languages. A cons cell is a simple data structure that contains two
+ * fields: car and cdr. The car field can hold any type of data, and the cdr
+ * field points to the next cons cell in the list. This allows us to create
+ * linked lists of arbitrary length. The CONS macro provides a convenient way to
+ * create cons cells, and the CONS_NIL macro represents the empty list. The
+ * CONS_NIL_P and CONS_NOT_NIL_P macros are utility functions for checking if a
+ * cons cell is the empty list or not.
  */
 #define CONS_NIL ((struct cons *)NULL)
 
