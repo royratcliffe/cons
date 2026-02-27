@@ -16,8 +16,8 @@ struct cons *cons_reverse(struct cons *cell) {
    * traversed the entire original list, at which point the reversed list will
    * contain all the cells in reverse order.
    */
-  struct cons *reversed = NULL;
-  while (cell != NULL) {
+  struct cons *reversed = CONS_NIL;
+  while (cell != CONS_NIL) {
     struct cons *cdr = cons_cdr(cell);
     cons_rplacd(cell, reversed);
     reversed = cell;
