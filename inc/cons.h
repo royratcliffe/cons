@@ -119,7 +119,36 @@ struct cons;
  * linked to the next one in the sequence.
  */
 struct cons {
+  /*!
+   * \brief Content of Address part of Register (CAR).
+   * \details The `car` field of a cons cell is a versatile component that can
+   * hold any type of data. It serves as the primary storage for the value or
+   * data associated with the cons cell. The `car` field can store various types
+   * of data, such as integers, strings, or even pointers to other data
+   * structures; this includes sub-cons cells recursively.
+   *
+   * This flexibility allows cons cells to be used in a wide range of
+   * applications, from simple lists to more complex data structures. The `car`
+   * field is a fundamental part of the cons cell, enabling it to hold and
+   * manipulate data in a flexible manner.
+   */
   void *car;
+
+  /*!
+   * \brief Content of Decrement part of Register (CDR).
+   * \details The `cdr` field of a cons cell is a crucial component that serves
+   * as a pointer to the next cons cell in a linked list. This design allows for
+   * the construction of linked lists and other complex data structures by
+   * linking cons cells together. The `cdr` field is specifically designed to
+   * point to another cons cell, facilitating the creation of sequences of cons
+   * cells that can represent lists, trees, and other composite data types.
+   *
+   * In a typical linked list implementation, the `cdr` field of each cons cell
+   * points to the next cons cell in the list, while the last cons cell's `cdr`
+   * points to CONS_NIL, indicating the end of the list. This structure allows
+   * for efficient traversal and manipulation of lists and other data structures
+   * built using cons cells.
+   */
   struct cons *cdr;
 };
 
