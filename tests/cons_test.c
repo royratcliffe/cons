@@ -15,13 +15,13 @@ int cons_test(int argc, char *argv[]) {
     cons(&list, &cell1);
     cons(&list, &cell2);
     cons(&list, &cell3);
-    for (struct cons *cell = list; cell != CONS_NIL; cell = cons_cdr(cell)) {
+    for (struct cons *cell = list; CONS_NOT_NIL_P(cell); cell = cons_cdr(cell)) {
       assert((uintptr_t)cons_car(cell) == 3 || (uintptr_t)cons_car(cell) == 2 || (uintptr_t)cons_car(cell) == 1);
     }
     assert(list == &cell3);
     assert(cons_cdr(&cell3) == &cell2);
     assert(cons_cdr(&cell2) == &cell1);
-    assert(cons_cdr(&cell1) == CONS_NIL);
+    assert(CONS_NIL_P(cons_cdr(&cell1)));
   }
 
   {
@@ -33,13 +33,13 @@ int cons_test(int argc, char *argv[]) {
     cons(&list, &cell2);
     cons(&list, &cell3);
     list = cons_reverse(list);
-    for (struct cons *cell = list; cell != CONS_NIL; cell = cons_cdr(cell)) {
+    for (struct cons *cell = list; CONS_NOT_NIL_P(cell); cell = cons_cdr(cell)) {
       assert((uintptr_t)cons_car(cell) == 1 || (uintptr_t)cons_car(cell) == 2 || (uintptr_t)cons_car(cell) == 3);
     }
     assert(list == &cell1);
     assert(cons_cdr(&cell1) == &cell2);
     assert(cons_cdr(&cell2) == &cell3);
-    assert(cons_cdr(&cell3) == CONS_NIL);
+    assert(CONS_NIL_P(cons_cdr(&cell3)));
   }
 
   return EXIT_SUCCESS;
