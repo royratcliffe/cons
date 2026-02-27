@@ -17,13 +17,11 @@ struct cons;
 
 /*!
  * \brief An empty list, represented as a NULL pointer.
- * \details The CONS_NIL macro represents the empty list in our implementation
+ * \details The CONS_NIL macro represents "the" empty list
  * of cons cells. It is defined as a NULL pointer, which allows us to easily
- * check for the end of a list. When we create a linked list of cons cells, the
+ * check for the end of a list. When creating a linked list of cons cells, the
  * last cell's cdr will point to CONS_NIL, indicating that there are no more
- * cells in the list. This convention simplifies list operations, such as
- * traversal and manipulation, by providing a clear termination point for the
- * list.
+ * cells in the list.
  * \note A cons cell, the fundamental building block of linked lists in
  * Lisp-like languages. A cons cell is a simple data structure that contains two
  * fields: car and cdr. The car field can hold any type of data, and the cdr
