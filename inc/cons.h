@@ -160,6 +160,17 @@ static inline void cons_rplaca(struct cons *cell, void *car) { cell->car = car; 
 
 static inline void cons_rplacd(struct cons *cell, struct cons *cdr) { cell->cdr = cdr; }
 
+/*!
+ * \brief Initialises a cons cell with a given `car` value and sets the `cdr` to CONS_NIL.
+ * \details The `cons_init` function is a utility function that initialises a
+ * cons cell with a specified `car` value and sets the `cdr` field to CONS_NIL,
+ * which represents the empty list. This function provides a convenient way to
+ * create a new cons cell with a given value while ensuring that the `cdr` is
+ * properly initialised to indicate that there are no further cells in the list.
+ * By using `cons_init`, you can easily create a new cons cell with a specific
+ * value and a well-defined end point for the list, making it easier to build
+ * and manipulate linked lists and other data structures using cons cells.
+ */
 static inline void cons_init(struct cons *cell, void *car) {
   cons_rplaca(cell, car);
   cons_rplacd(cell, CONS_NIL);
