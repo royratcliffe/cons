@@ -106,11 +106,17 @@ struct cons;
  * allowing for the construction of linked lists and other complex data
  * structures.
  *
- * \note The `cdr` field is often used to create linked lists, where each cons cell points to the next one in the sequence. This design allows for efficient
- * list manipulation and traversal, as each cons cell can be easily linked to the next one in the sequence. The `car` field can hold any type of data, while the
- * `cdr` field is specifically designed to link to another cons cell, facilitating the construction of linked lists and other complex data structures.
- * \note The `cdr` field is typically used to point to the next cons cell in a list, while the `car` field holds the actual data. This design allows for
- * efficient list manipulation and traversal, as each cons cell can be easily linked to the next one in the sequence.
+ * \note The `cdr` field is often used to create linked lists, where each cons
+ * cell points to the next one in the sequence. This design allows for efficient
+ * list manipulation and traversal, as each cons cell can be easily linked to
+ * the next one in the sequence. The `car` field can hold any type of data,
+ * while the `cdr` field is specifically designed to link to another cons cell,
+ * facilitating the construction of linked lists and other complex data
+ * structures.
+ * \note The `cdr` field is typically used to point to the next cons cell in a
+ * list, while the `car` field holds the actual data. This design allows for
+ * efficient list manipulation and traversal, as each cons cell can be easily
+ * linked to the next one in the sequence.
  */
 struct cons {
   void *car;
