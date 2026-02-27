@@ -8,38 +8,38 @@ int cons_test(int argc, char *argv[]) {
   CONS(NULL, NULL);
 
   {
-    struct cons cell1 = CONS((void *)1, NULL);
-    struct cons cell2 = CONS((void *)2, NULL);
-    struct cons cell3 = CONS((void *)3, NULL);
-    struct cons *list = NULL;
+    struct cons cell1 = CONS((void *)1, CONS_NIL);
+    struct cons cell2 = CONS((void *)2, CONS_NIL);
+    struct cons cell3 = CONS((void *)3, CONS_NIL);
+    struct cons *list = CONS_NIL;
     cons(&list, &cell1);
     cons(&list, &cell2);
     cons(&list, &cell3);
-    for (struct cons *cell = list; cell != NULL; cell = cons_cdr(cell)) {
+    for (struct cons *cell = list; cell != CONS_NIL; cell = cons_cdr(cell)) {
       assert((uintptr_t)cons_car(cell) == 3 || (uintptr_t)cons_car(cell) == 2 || (uintptr_t)cons_car(cell) == 1);
     }
     assert(list == &cell3);
     assert(cons_cdr(&cell3) == &cell2);
     assert(cons_cdr(&cell2) == &cell1);
-    assert(cons_cdr(&cell1) == NULL);
+    assert(cons_cdr(&cell1) == CONS_NIL);
   }
 
   {
-    struct cons cell1 = CONS((void *)1, NULL);
-    struct cons cell2 = CONS((void *)2, NULL);
-    struct cons cell3 = CONS((void *)3, NULL);
-    struct cons *list = NULL;
+    struct cons cell1 = CONS((void *)1, CONS_NIL);
+    struct cons cell2 = CONS((void *)2, CONS_NIL);
+    struct cons cell3 = CONS((void *)3, CONS_NIL);
+    struct cons *list = CONS_NIL;
     cons(&list, &cell1);
     cons(&list, &cell2);
     cons(&list, &cell3);
     list = cons_reverse(list);
-    for (struct cons *cell = list; cell != NULL; cell = cons_cdr(cell)) {
+    for (struct cons *cell = list; cell != CONS_NIL; cell = cons_cdr(cell)) {
       assert((uintptr_t)cons_car(cell) == 1 || (uintptr_t)cons_car(cell) == 2 || (uintptr_t)cons_car(cell) == 3);
     }
     assert(list == &cell1);
     assert(cons_cdr(&cell1) == &cell2);
     assert(cons_cdr(&cell2) == &cell3);
-    assert(cons_cdr(&cell3) == NULL);
+    assert(cons_cdr(&cell3) == CONS_NIL);
   }
 
   return EXIT_SUCCESS;
