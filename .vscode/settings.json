@@ -3,7 +3,6 @@
     "cmake.coverageInfoFiles": [
         "${workspaceFolder}/build/coverage_filtered.info"
     ],
-    "cmake.preRunCoverageTarget": "lcov",
-    "cmake.postRunCoverageTarget": "genhtml",
+    "cmake.postRunCoverageTarget": "lcov",
     "testing.defaultGutterClickAction": "runWithCoverage"
 }
