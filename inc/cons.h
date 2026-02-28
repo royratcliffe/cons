@@ -178,6 +178,26 @@ static inline void cons_init(struct cons *cell, void *car) {
  */
 struct cons **cons(struct cons **list, struct cons *cell);
 
+/*!
+ * \brief Destructively deletes the first cons cell with the specified \c car
+ * value from the list.
+ * \param list Pointer to the list head.
+ * \param car The value to match for deletion.
+ * \return Pointer to the deleted cons cell, or \c CONS_NIL if no matching cell
+ * was found.
+ * \details This function traverses the list of cons cells, looking for the
+ * first cell whose \c car field matches the specified value. If such a cell is
+ * found, it is removed from the list by updating the \c cdr pointer of the
+ * previous cell (or the head pointer if the cell to delete is the first cell)
+ * to point to the next cell, effectively bypassing the deleted cell. The
+ * function then returns a pointer to the deleted cell. If no matching cell is
+ * found after traversing the entire list, the function returns \c CONS_NIL to
+ * indicate that no deletion occurred. This operation is destructive because it
+ * modifies the original list structure by removing a cell from it. The caller
+ * is responsible for managing the memory of the deleted cell if necessary, as
+ * this function does not free the memory of the deleted cell; it only removes
+ * it from the list.
+ */
 struct cons *cons_delete(struct cons **list, void *car);
 
 /*!
