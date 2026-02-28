@@ -202,6 +202,8 @@ static inline void cons_init(struct cons *cell, void *car) {
  */
 struct cons **cons(struct cons **list, struct cons *cell);
 
+struct cons *cons_delete(struct cons **list, void *car);
+
 /*!
  * \brief Reverses a linked list of cons cells, mutating the original list.
  * \details This function takes a pointer to the head of a linked list of cons

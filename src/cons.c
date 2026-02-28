@@ -6,6 +6,34 @@ struct cons **cons(struct cons **list, struct cons *cell) {
   return &cell->cdr;
 }
 
+struct cons *cons_delete(struct cons **list, void *car) {
+  struct cons *prev = CONS_NIL;
+  struct cons *curr = *list;
+  while (CONS_NOT_NIL_P(curr)) {
+    if (cons_car(curr) == car) {
+      /*
+       * Found the cell to delete. If it's the head of the list, update the head
+       * pointer to the next cell. Otherwise, link the previous cell to the next
+       * cell, effectively removing the current cell from the list. Finally,
+       * return the deleted cell.
+       */
+      if (CONS_NIL_P(prev)) {
+        *list = cons_cdr(curr);
+      } else {
+        cons_rplacd(prev, cons_cdr(curr));
+      }
+      return curr;
+    }
+    prev = curr;
+    curr = cons_cdr(curr);
+  }
+  /*
+   * If the cell is not found after traversing the entire list, return CONS_NIL
+   * to indicate that no deletion occurred.
+   */
+  return CONS_NIL;
+}
+
 void cons_reverse(struct cons **list) {
   /*
    * Maintain a pointer to the reversed list (initially CONS_NIL) and
