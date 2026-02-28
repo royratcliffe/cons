@@ -126,7 +126,7 @@ static inline void *cons_car(const struct cons *cell) { return cell->car; }
 /*!
  * \brief Accessor for the cdr field of a cons cell.
  * \param cell The cons cell to access.
- * \return Pointer to the next cons cell (or CONS_NIL).
+ * \return Pointer to the next cons cell (or \c CONS_NIL).
  */
 static inline struct cons *cons_cdr(const struct cons *cell) { return cell->cdr; }
 
