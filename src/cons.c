@@ -1,3 +1,15 @@
+/* SPDX-License-Identifier: MIT */
+/*!
+ * \file cons.c
+ * \brief Implementation of cons cell operations.
+ * \details This file implements functions for manipulating cons cells, which
+ * are fundamental data structures in Lisp-like languages. The functions create
+ * new cons cells, delete cells from a list, and reverse a list of cons cells.
+ * The operations work with the structure defined in \c cons.h to construct and
+ * manipulate linked lists and other complex data structures.
+ * \copyright 2026, Roy Ratcliffe, Northumberland, United Kingdom
+ */
+
 #include <cons.h>
 
 struct cons **cons(struct cons **list, struct cons *cell) {
