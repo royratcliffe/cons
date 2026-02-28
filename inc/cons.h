@@ -176,7 +176,7 @@ static inline void cons_init(struct cons *cell, void *car) {
 struct cons **cons(struct cons **list, struct cons *cell);
 
 /*!
- * \brief Destructively deletes the first cons cell with the specified \c car
+ * \brief Destructively deletes the \e first cons cell with the specified \c car
  * value from the list.
  * \param list Pointer to the list head.
  * \param car The value to match for deletion.
