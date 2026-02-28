@@ -8,8 +8,6 @@ int test_cons(int argc, char *argv[]) {
   (void)argc;
   (void)argv;
 
-  CONS(NULL, NULL);
-
   {
     struct cons cell1 = CONS((void *)1, CONS_NIL);
     struct cons cell2 = CONS((void *)2, CONS_NIL);
