@@ -23,7 +23,7 @@ struct cons;
  *
  * The \c CONS_NIL macro represents "the" empty list of cons cells. It is defined
  * as a \c NULL pointer for easily checking for the end of a list. When creating a
- * linked list of cons cells, the last cell's `cdr` field will point to
+ * linked list of cons cells, the last cell's \c cdr field will point to
  * \c CONS_NIL, indicating that there are no more cells in the list.
  */
 #define CONS_NIL ((struct cons *)NULL)
@@ -34,7 +34,7 @@ struct cons;
 /*! \brief Returns \c true if the cons cell is not \c CONS_NIL. */
 #define CONS_NOT_NIL_P(_cell) ((_cell) != CONS_NIL)
 
-/*! \brief Creates a new cons cell with the given car and cdr values. */
+/*! \brief Creates a new cons cell with the given \c car and \c cdr values. */
 #define CONS(_car, _cdr) ((struct cons){.car = (_car), .cdr = (_cdr)})
 
 /*!
