@@ -150,8 +150,18 @@ struct cons {
   struct cons *cdr;
 };
 
+/*!
+ * \brief Accessor for the car field of a cons cell.
+ * \param cell The cons cell to access.
+ * \return The value stored in the car field of the cons cell.
+ */
 static inline void *cons_car(const struct cons *cell) { return cell->car; }
 
+/*!
+ * \brief Accessor for the cdr field of a cons cell.
+ * \param cell The cons cell to access.
+ * \return Pointer to the next cons cell (or CONS_NIL).
+ */
 static inline struct cons *cons_cdr(const struct cons *cell) { return cell->cdr; }
 
 static inline void cons_rplaca(struct cons *cell, void *car) { cell->car = car; }
