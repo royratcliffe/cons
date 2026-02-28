@@ -50,15 +50,18 @@ find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
 if(DOXYGEN_FOUND)
     set(DOXYGEN_OPTIMIZE_OUTPUT_FOR_C YES)
     set(DOXYGEN_SOURCE_BROWSER YES)
-    doxygen_add_docs(doxy ${PROJECT_SOURCE_DIR}/inc ${PROJECT_SOURCE_DIR}/src)
+    doxygen_add_docs(doxy
+        ${PROJECT_SOURCE_DIR}/inc
+        ${PROJECT_SOURCE_DIR}/src
+        COMMENT "Generating API documentation with Doxygen"
+    )
 endif()
 
 # Add custom commands for code analysis. Enable cppcheck for Debug build type.
 # This will run cppcheck only if the build type is Debug.
 find_program(CPPCHECK cppcheck)
 if(CPPCHECK AND CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_custom_target(
-        cppcheck
+    add_custom_target(cppcheck
         COMMAND ${CPPCHECK}
             --project=${CMAKE_BINARY_DIR}/compile_commands.json
             --output-file=${CMAKE_BINARY_DIR}/cppcheck_report.xml
@@ -79,12 +82,13 @@ endif()
 
 # Add custom commands for code coverage analysis. Enable lcov and genhtml if
 # they are found. Only enable code coverage analysis for Debug build type, as it
-# is typically used for development and testing.
-# Note that code coverage analysis can add overhead to the build and runtime, so
-# it is generally not recommended for Release builds.
+# is typically used for development and testing. Code coverage analysis can add
+# overhead to the build and runtime, so it is generally not recommended for
+# Release builds.
 #
-# If lcov is found, add the necessary compiler and linker flags to enable code
+# If lcov is found, add the coverage compiler and linker flags to enable code
 # coverage analysis.
+#
 # Note that find_program will return the path to the executable if found, or
 # NOTFOUND if not found. It will also cache the result, so subsequent calls will
 # return the cached value. This allows us to check if lcov is available and
@@ -110,6 +114,9 @@ if(LCOV AND CMAKE_BUILD_TYPE STREQUAL "Debug")
     )
     set_property(TARGET lcov PROPERTY FOLDER "Analysis")
 
+    # If genhtml is found, add a custom target to generate an HTML report from the
+    # filtered coverage data. This will create a coverage_report directory with an
+    # index.html file that can be opened in a web browser to view the coverage report.
     find_program(GENHTML genhtml)
     if(GENHTML)
         message(STATUS "lcov and genhtml found, code coverage targets will be available")
