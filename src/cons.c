@@ -7,25 +7,25 @@ struct cons **cons(struct cons **list, struct cons *cell) {
 }
 
 struct cons *cons_delete(struct cons **list, void *car) {
-  struct cons *prev = CONS_NIL;
-  struct cons *curr = *list;
-  while (CONS_NOT_NIL_P(curr)) {
-    if (cons_car(curr) == car) {
+  struct cons *deleted = CONS_NIL;
+  struct cons *cell = *list;
+  while (CONS_NOT_NIL_P(cell)) {
+    if (cons_car(cell) == car) {
       /*
        * Found the cell to delete. If it's the head of the list, update the head
        * pointer to the next cell. Otherwise, link the previous cell to the next
        * cell, effectively removing the current cell from the list. Finally,
        * return the deleted cell.
        */
-      if (CONS_NIL_P(prev)) {
-        *list = cons_cdr(curr);
+      if (CONS_NIL_P(deleted)) {
+        *list = cons_cdr(cell);
       } else {
-        cons_rplacd(prev, cons_cdr(curr));
+        cons_rplacd(deleted, cons_cdr(cell));
       }
-      return curr;
+      return cell;
     }
-    prev = curr;
-    curr = cons_cdr(curr);
+    deleted = cell;
+    cell = cons_cdr(cell);
   }
   /*
    * If the cell is not found after traversing the entire list, return CONS_NIL
