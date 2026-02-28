@@ -197,6 +197,21 @@ size_t cons_length(const struct cons *cell);
  */
 struct cons *cons_last(struct cons *cell);
 
+/*!
+ * \brief Returns the n'th cons cell in a linked list of cons cells.
+ * \param cell The head of the list to find the n'th cell of, or \c CONS_NIL for
+ * an empty list.
+ * \param nth The zero-based index of the cell to retrieve.
+ * \return Pointer to the n'th cons cell in the list, or \c CONS_NIL if the index
+ * is out of bounds.
+ * \details Iteratively traverses the linked list of cons cells, counting the
+ * cells as it goes. When the count reaches the specified index \c nth, it
+ * returns a pointer to the \e current cell. If the end of the list is reached
+ * before finding the n'th cell (i.e., if the input pointer becomes \c CONS_NIL),
+ * the function returns \c CONS_NIL to indicate that the index is out of bounds.
+ */
+struct cons *cons_nth(struct cons *cell, size_t nth);
+
 #ifdef __cplusplus
 }
 #endif

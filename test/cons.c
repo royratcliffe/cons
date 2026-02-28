@@ -20,6 +20,9 @@ int test_cons(int argc, char *argv[]) {
     cons(&list, &cell3);
     assert(cons_length(list) == 3);
     assert(cons_last(list) == &cell1);
+    assert(cons_nth(list, 0) == &cell3);
+    assert(cons_nth(list, 1) == &cell2);
+    assert(cons_nth(list, 2) == &cell1);
     for (struct cons *cell = list; CONS_NOT_NIL_P(cell); cell = cons_cdr(cell)) {
       assert((uintptr_t)cons_car(cell) == 3 || (uintptr_t)cons_car(cell) == 2 || (uintptr_t)cons_car(cell) == 1);
     }
