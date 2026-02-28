@@ -5,6 +5,9 @@
 #include <stdlib.h>
 
 int test_cons(int argc, char *argv[]) {
+  (void)argc;
+  (void)argv;
+
   CONS(NULL, NULL);
 
   {
