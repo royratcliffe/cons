@@ -5,7 +5,7 @@
 #define CONS_H
 
 /*
- * for NULL
+ * for NULL (the empty list)
  */
 #include <stddef.h>
 
