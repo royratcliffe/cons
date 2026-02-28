@@ -30,6 +30,7 @@ include(CTest)
 create_test_sourcelist(test_sources
     test_runner.c
     test/cons.c
+    test/nested_cons.c
     test/delete.c
 )
 
@@ -42,6 +43,7 @@ add_executable(test_runner
 target_link_libraries(test_runner cons)
 
 add_test(NAME cons COMMAND test_runner test/cons)
+add_test(NAME nested_cons COMMAND test_runner test/nested_cons)
 add_test(NAME delete COMMAND test_runner test/delete)
 
 # https://cmake.org/cmake/help/latest/module/FindDoxygen.html
