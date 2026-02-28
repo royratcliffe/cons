@@ -183,6 +183,20 @@ void cons_reverse(struct cons **list);
  */
 size_t cons_length(const struct cons *cell);
 
+/*!
+ * \brief Returns the last cons cell in a linked list of cons cells.
+ * \param cell The head of the list to find the last cell of, or \c CONS_NIL for
+ * an empty list.
+ * \return Pointer to the last cons cell in the list, or \c CONS_NIL if the
+ * list is empty.
+ * \details This function iteratively traverses the linked list of cons cells
+ * until it reaches the last cell, which is identified by having its \c cdr field
+ * equal to \c CONS_NIL. It returns a pointer to this last cell. If the input
+ * list is empty (i.e., if the input pointer is \c CONS_NIL), the function
+ * returns \c CONS_NIL to indicate that there are no cells in the list.
+ */
+struct cons *cons_last(struct cons *cell);
+
 #ifdef __cplusplus
 }
 #endif

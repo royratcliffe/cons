@@ -73,3 +73,13 @@ size_t cons_length(const struct cons *cell) {
   }
   return length;
 }
+
+struct cons *cons_last(struct cons *cell) {
+  if (CONS_NIL_P(cell)) {
+    return CONS_NIL;
+  }
+  while (CONS_NOT_NIL_P(cons_cdr(cell))) {
+    cell = cons_cdr(cell);
+  }
+  return cell;
+}
