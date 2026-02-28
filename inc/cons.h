@@ -117,14 +117,14 @@ struct cons {
 };
 
 /*!
- * \brief Accessor for the car field of a cons cell.
+ * \brief Accessor for the \c car field of a cons cell.
  * \param cell The cons cell to access.
- * \return The value stored in the car field of the cons cell.
+ * \return The value stored in the \c car field of the cons cell.
  */
 static inline void *cons_car(const struct cons *cell) { return cell->car; }
 
 /*!
- * \brief Accessor for the cdr field of a cons cell.
+ * \brief Accessor for the \c cdr field of a cons cell.
  * \param cell The cons cell to access.
  * \return Pointer to the next cons cell (or \c CONS_NIL).
  */
