@@ -64,3 +64,12 @@ void cons_reverse(struct cons **list) {
   }
   *list = reversed;
 }
+
+size_t cons_length(const struct cons *cell) {
+  size_t length = 0;
+  while (CONS_NOT_NIL_P(cell)) {
+    length++;
+    cell = cons_cdr(cell);
+  }
+  return length;
+}

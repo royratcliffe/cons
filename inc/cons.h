@@ -172,6 +172,16 @@ struct cons *cons_delete(struct cons **list, void *car);
  */
 void cons_reverse(struct cons **list);
 
+/*!
+ * \brief Computes the length of a linked list of cons cells.
+ * \param cell The head of the list to compute the length of.
+ * \return The number of cons cells in the list.
+ * \details This function iteratively traverses the linked list of cons cells,
+ * counting the number of cells until it reaches the end of the list (indicated
+ * by \c CONS_NIL). It returns the total count as the length of the list.
+ */
+size_t cons_length(const struct cons *cell);
+
 #ifdef __cplusplus
 }
 #endif
