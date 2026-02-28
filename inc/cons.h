@@ -1,4 +1,6 @@
 /*!
+ * \file cons.h
+ * \brief A simple implementation of cons cells for building linked lists.
  */
 
 #ifndef CONS_H
