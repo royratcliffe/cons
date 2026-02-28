@@ -50,11 +50,14 @@ add_test(NAME delete COMMAND test_runner test/delete)
 # https://www.mcternan.me.uk/mscgen/
 find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
 if(DOXYGEN_FOUND)
+    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "${PROJECT_SOURCE_DIR}/README.md")
+    set(DOXYGEN_USE_MATHJAX YES)
     set(DOXYGEN_OPTIMIZE_OUTPUT_FOR_C YES)
     set(DOXYGEN_SOURCE_BROWSER YES)
     set(DOXYGEN_INLINE_SOURCES YES)
     set(DOXYGEN_EXTRACT_STATIC YES)
     doxygen_add_docs(doxy
+        ${PROJECT_SOURCE_DIR}/README.md
         ${PROJECT_SOURCE_DIR}/inc
         ${PROJECT_SOURCE_DIR}/src
         COMMENT "Generating API documentation with Doxygen"
