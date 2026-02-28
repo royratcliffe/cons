@@ -1,17 +1,9 @@
 {
     "testing.coverageToolbarEnabled": true,
-    "testing.coverageGutterEnabled": true,
-    "testing.coverageHighlightingMode": "gutterAndEditor",
-    "testing.coverageColors": {
-        "covered": "rgba(0, 255, 0, 0.3)",
-        "uncovered": "rgba(255, 0, 0, 0.3)",
-        "partiallyCovered": "rgba(255, 255, 0, 0.3)"
-    },
     "cmake.coverageInfoFiles": [
         "${workspaceFolder}/build/coverage_filtered.info"
     ],
-    // "cmake.preRunCoverageTarget": "precoverage",
-    // "cmake.postRunCoverageTarget": "postcoverage",
-    "cmake.postRunCoverageTarget": "postcoverage",
+    "cmake.preRunCoverageTarget": "lcov",
+    "cmake.postRunCoverageTarget": "genhtml",
     "testing.defaultGutterClickAction": "runWithCoverage"
 }
