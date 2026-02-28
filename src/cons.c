@@ -7,8 +7,7 @@ struct cons **cons(struct cons **list, struct cons *cell) {
 }
 
 struct cons *cons_delete(struct cons **list, void *car) {
-  struct cons *deleted = CONS_NIL;
-  struct cons *cell = *list;
+  struct cons *deleted = CONS_NIL, *cell = *list;
   while (CONS_NOT_NIL_P(cell)) {
     if (cons_car(cell) == car) {
       /*
@@ -44,8 +43,7 @@ void cons_reverse(struct cons **list) {
    * reversing has traversed the entire original list, at which point the
    * reversed list will contain all the cells in reverse order.
    */
-  struct cons *reversed = CONS_NIL;
-  struct cons *cell = *list;
+  struct cons *reversed = CONS_NIL, *cell = *list;
   while (CONS_NOT_NIL_P(cell)) {
     struct cons *cdr = cons_cdr(cell);
     cons_rplacd(cell, reversed);
