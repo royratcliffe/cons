@@ -174,7 +174,8 @@ void cons_reverse(struct cons **list);
 
 /*!
  * \brief Computes the length of a linked list of cons cells.
- * \param cell The head of the list to compute the length of.
+ * \param cell The head of the list to compute the length of, or \c CONS_NIL for
+ * an empty list.
  * \return The number of cons cells in the list.
  * \details This function iteratively traverses the linked list of cons cells,
  * counting the number of cells until it reaches the end of the list (indicated
