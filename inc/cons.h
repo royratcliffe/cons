@@ -130,8 +130,18 @@ static inline void *cons_car(const struct cons *cell) { return cell->car; }
  */
 static inline struct cons *cons_cdr(const struct cons *cell) { return cell->cdr; }
 
+/*!
+ * \brief Mutator for the \c car field of a cons cell.
+ * \param cell The cons cell to modify.
+ * \param car The new value to set in the \c car field of the cons cell.
+ */
 static inline void cons_rplaca(struct cons *cell, void *car) { cell->car = car; }
 
+/*!
+ * \brief Mutator for the \c cdr field of a cons cell.
+ * \param cell The cons cell to modify.
+ * \param cdr The new value to set in the \c cdr field of the cons cell.
+ */
 static inline void cons_rplacd(struct cons *cell, struct cons *cdr) { cell->cdr = cdr; }
 
 /*! \brief Initialises a cons cell with the given \c car value and \c cdr set to \c CONS_NIL. */
