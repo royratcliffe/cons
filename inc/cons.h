@@ -18,59 +18,23 @@ extern "C" {
 struct cons;
 
 /*!
- * \brief An empty list, represented as a NULL pointer.
- * \details The CONS_NIL macro represents "the" empty list
- * of cons cells. It is defined as a NULL pointer, which allows us to easily
- * check for the end of a list. When creating a linked list of cons cells, the
- * last cell's cdr will point to CONS_NIL, indicating that there are no more
- * cells in the list.
- * \note A cons cell, the fundamental building block of linked lists in
- * Lisp-like languages. A cons cell is a simple data structure that contains two
- * fields: car and cdr. The car field can hold any type of data, and the cdr
- * field points to the next cons cell in the list. This allows us to create
- * linked lists of arbitrary length. The CONS macro provides a convenient way to
- * create cons cells, and the CONS_NIL macro represents the empty list. The
- * CONS_NIL_P and CONS_NOT_NIL_P macros are utility functions for checking if a
- * cons cell is the empty list or not.
+ * \brief The empty list (a \c NULL pointer).
+ * \details Marks the end of a cons list.
+ *
+ * The \c CONS_NIL macro represents "the" empty list of cons cells. It is defined
+ * as a \c NULL pointer for easily checking for the end of a list. When creating a
+ * linked list of cons cells, the last cell's `cdr` field will point to
+ * \c CONS_NIL, indicating that there are no more cells in the list.
  */
 #define CONS_NIL ((struct cons *)NULL)
 
-/*!
- * \brief Checks if a cons cell is the empty list (CONS_NIL).
- * \details The CONS_NIL_P macro is a utility function that checks if a given
- * cons cell is equal to CONS_NIL, which represents the empty list. This macro
- * is useful for determining if a cons cell is the end of a list or if it
- * contains data. It returns true if the cell is the empty list and false
- * otherwise.
- * \param _cell The cons cell to be checked against CONS_NIL.
- * \return A boolean value indicating whether the cons cell is the empty list
- * (CONS_NIL) or not.
- */
+/*! \brief Returns \c true if the cons cell is \c CONS_NIL. */
 #define CONS_NIL_P(_cell) ((_cell) == CONS_NIL)
 
-/*!
- * \brief Checks if a cons cell is not the empty list (CONS_NIL).
- * \details The CONS_NOT_NIL_P macro is a utility function that checks if a given
- * cons cell is not equal to CONS_NIL, which represents the empty list. This macro
- * is useful for determining if a cons cell contains data. It returns true if the
- * cell is not the empty list and false otherwise.
- * \param _cell The cons cell to be checked against CONS_NIL.
- * \return A boolean value indicating whether the cons cell is not the empty list
- * (CONS_NIL) or not.
- */
+/*! \brief Returns \c true if the cons cell is not \c CONS_NIL. */
 #define CONS_NOT_NIL_P(_cell) ((_cell) != CONS_NIL)
 
-/*!
- * \brief Creates a new cons cell.
- * \details The CONS macro is a utility function that creates a new cons cell
- * with the specified `car` and `cdr` values. This macro simplifies the process
- * of creating cons cells by providing a convenient syntax for initialising the
- * fields of the cons cell. The `car` field holds the actual data, while the
- * `cdr` field points to the next cons cell in the list.
- * \param _car The value to be stored in the `car` field of the cons cell.
- * \param _cdr The value to be stored in the `cdr` field of the cons cell.
- * \return A new cons cell with the specified `car` and `cdr` values.
- */
+/*! \brief Creates a new cons cell with the given car and cdr values. */
 #define CONS(_car, _cdr) ((struct cons){.car = (_car), .cdr = (_cdr)})
 
 /*!
