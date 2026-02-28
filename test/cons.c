@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-int cons_test(int argc, char *argv[]) {
+int test_cons(int argc, char *argv[]) {
   CONS(NULL, NULL);
 
   {
@@ -32,7 +32,7 @@ int cons_test(int argc, char *argv[]) {
     cons(&list, &cell1);
     cons(&list, &cell2);
     cons(&list, &cell3);
-    list = cons_reverse(list);
+    cons_reverse(&list);
     for (struct cons *cell = list; CONS_NOT_NIL_P(cell); cell = cons_cdr(cell)) {
       assert((uintptr_t)cons_car(cell) == 1 || (uintptr_t)cons_car(cell) == 2 || (uintptr_t)cons_car(cell) == 3);
     }

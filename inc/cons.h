@@ -213,7 +213,7 @@ struct cons **cons(struct cons **list, struct cons *cell);
  * reversed. The list is expected to be properly terminated with a NULL cdr.
  * \return A pointer to the head of the reversed linked list of cons cells.
  */
-struct cons *cons_reverse(struct cons *list);
+void cons_reverse(struct cons **list);
 
 #ifdef __cplusplus
 }

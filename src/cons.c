@@ -6,7 +6,7 @@ struct cons **cons(struct cons **list, struct cons *cell) {
   return &cell->cdr;
 }
 
-struct cons *cons_reverse(struct cons *cell) {
+void cons_reverse(struct cons **list) {
   /*
    * Maintain a pointer to the reversed list (initially CONS_NIL) and
    * iteratively traverse the original list. For each cell, save the next cell
@@ -17,11 +17,12 @@ struct cons *cons_reverse(struct cons *cell) {
    * reversed list will contain all the cells in reverse order.
    */
   struct cons *reversed = CONS_NIL;
+  struct cons *cell = *list;
   while (CONS_NOT_NIL_P(cell)) {
     struct cons *cdr = cons_cdr(cell);
     cons_rplacd(cell, reversed);
     reversed = cell;
     cell = cdr;
   }
-  return reversed;
+  *list = reversed;
 }
