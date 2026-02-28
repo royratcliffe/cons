@@ -205,15 +205,13 @@ struct cons **cons(struct cons **list, struct cons *cell);
 struct cons *cons_delete(struct cons **list, void *car);
 
 /*!
- * \brief Reverses a linked list of cons cells, mutating the original list.
+ * \brief Reverses a linked list of cons cells in place.
  * \details This function takes a pointer to the head of a linked list of cons
  * cells and reverses the order of the cells in the list. It iteratively
  * traverses the list, reassigning the cdr pointers to point to the previous
- * cell, effectively reversing the list. The function returns a pointer to the
- * new head of the reversed list.
- * \param cell A pointer to the head of the linked list of cons cells to be
- * reversed. The list is expected to be properly terminated with a NULL cdr.
- * \return A pointer to the head of the reversed linked list of cons cells.
+ * cell, effectively reversing the list.
+ * \param list The list to reverse. This is a pointer to the head of the list,
+ * and it will be updated to point to the new head of the reversed list.
  */
 void cons_reverse(struct cons **list);
 
