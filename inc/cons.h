@@ -151,30 +151,27 @@ static inline void cons_init(struct cons *cell, void *car) {
 }
 
 /*!
- * \brief Prepend a cons cell to a list.
- * \details The `cons` function takes a pointer to a list (which is a pointer to
- * a cons cell) and a cons cell to prepend. It initialises the `cdr` of the new
- * cell to point to the existing list and updates the list pointer to point to
- * the new cell. This effectively adds the new cell to the front of the list.
- * The `cons` function is a fundamental operation in Lisp-like languages, where
- * it is used to construct lists and other complex data structures. The `car`
- * field of the new cell can hold any type of data, while the `cdr` field is
+ * \brief Prepends a cons cell to a list.
+ * \param list Pointer to the list head to which the new cell will be prepended.
+ * This is a pointer to a pointer to a cons cell, allowing the function to
+ * update the list pointer to point to the new cell.
+ * \param cell The cons cell to prepend to the list.
+ * \return Pointer to the \c cdr field of the new cell for chaining. Use the
+ * return value to further add elements to the list by chaining additional cons
+ * cells together.
+ * \details The \c cons function takes a pointer to a list (which is a pointer
+ * to a cons cell) and a cons cell to prepend. It initialises the \c cdr of the
+ * new cell to point to the existing list and updates the list pointer to point
+ * to the new cell. This effectively adds the new cell to the front of the list.
+ * The \c cons function is a fundamental operation in Lisp-like languages, where
+ * it is used to construct lists and other complex data structures. The \c car
+ * field of the new cell can hold any type of data, while the \c cdr field is
  * specifically designed to link to another cons cell, facilitating the
- * construction of linked lists and other complex data structures. The `cons`
+ * construction of linked lists and other complex data structures. The \c cons
  * function allows for efficient list manipulation by enabling the addition of
  * new elements to the front of the list without needing to traverse the entire
  * list, making it a powerful tool for building and modifying lists in a
  * flexible and efficient manner.
- * \param list Pointer to the list to which the new cell will be prepended. This
- * is a pointer to a pointer to a cons cell, allowing the function to update the
- * list pointer to point to the new cell.
- * \param cell The cons cell to prepend to the list. The `car` field of this
- * cell can hold any type of data, while the `cdr` field is specifically
- * designed to link to another cons cell, facilitating the construction of
- * linked lists and other complex data structures.
- * \return A pointer to the `cdr` field of the new cell, allowing for further
- * chaining of cons cells if needed. This return value can be used to easily add
- * more elements to the list by chaining additional cons cells together.
  */
 struct cons **cons(struct cons **list, struct cons *cell);
 
