@@ -40,7 +40,6 @@ int test_nested_cons(int argc, char *argv[]) {
     struct cons *head = CONS_NIL;
     cons(cons(&head, &cell1), &cell2);
     cons(&head, &cell3);
-
     assert(head == &cell3);
     assert(cons_cdr(&cell3) == &cell1);
     assert(cons_cdr(&cell1) == &cell2);
