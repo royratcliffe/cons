@@ -12,6 +12,11 @@
  */
 #include <cons.h>
 
+/*
+ * for malloc and free
+ */
+#include <stdlib.h>
+
 struct cons **cons(struct cons **list, struct cons *cell) {
   cons_rplacd(cell, *list);
   *list = cell;
@@ -113,3 +118,13 @@ struct cons *cons_append(struct cons *cell1, struct cons *cell2) {
   cons_rplacd(last, cell2);
   return cell1;
 }
+
+struct cons *cons_heap(void *car) {
+  struct cons *cell = (struct cons *)malloc(sizeof(struct cons));
+  if (CONS_NOT_NIL_P(cell)) {
+    cons_init(cell, car);
+  }
+  return cell;
+}
+
+void cons_free(struct cons *cell) { free(cell); }

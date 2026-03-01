@@ -243,6 +243,20 @@ struct cons *cons_member(struct cons *cell, void *car);
  */
 struct cons *cons_append(struct cons *cell1, struct cons *cell2);
 
+/*!
+ * \brief Allocates a new cons cell on the heap.
+ * \details Allocates memory for a new cons cell and initialises
+ * it with the provided \c car value. The caller is responsible for
+ * freeing the allocated memory when it is no longer needed.
+ * \param car The value to store in the \c car field of the new cons cell.
+ * \return Pointer to the newly allocated cons cell, or \c CONS_NIL if memory
+ * allocation fails.
+ */
+struct cons *cons_heap(void *car);
+
+/*! \brief Frees a heap-allocated cons cell. */
+void cons_free(struct cons *cell);
+
 #ifdef __cplusplus
 }
 #endif
