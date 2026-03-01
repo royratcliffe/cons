@@ -1,10 +1,10 @@
 /* SPDX-License-Identifier: MIT */
+
 /*!
  * \file cons.h
  * \brief A simple implementation of cons cells for building linked lists.
  * \copyright 2026, Roy Ratcliffe, Northumberland, United Kingdom
  */
-
 #ifndef CONS_H
 #define CONS_H
 

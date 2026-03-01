@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: MIT */
+
 /*!
  * \file cons.c
  * \brief Implementation of cons cell operations.
@@ -9,7 +10,6 @@
  * manipulate linked lists and other complex data structures.
  * \copyright 2026, Roy Ratcliffe, Northumberland, United Kingdom
  */
-
 #include <cons.h>
 
 struct cons **cons(struct cons **list, struct cons *cell) {
