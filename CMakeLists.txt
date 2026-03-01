@@ -33,6 +33,7 @@ create_test_sourcelist(test_sources
     test/nested_cons.c
     test/delete.c
     test/member.c
+    test/append.c
 )
 
 # Add a test executable that links against the library.
@@ -46,6 +47,7 @@ add_test(NAME cons COMMAND test_runner test/cons)
 add_test(NAME nested_cons COMMAND test_runner test/nested_cons)
 add_test(NAME delete COMMAND test_runner test/delete)
 add_test(NAME member COMMAND test_runner test/member)
+add_test(NAME append COMMAND test_runner test/append)
 
 # https://cmake.org/cmake/help/latest/module/FindDoxygen.html
 # https://www.mcternan.me.uk/mscgen/
