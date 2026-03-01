@@ -128,6 +128,15 @@ struct cons *cons_heap(void *car) {
 }
 
 void cons_free(struct cons *cell) {
+  /*
+   * Check for CONS_NIL before freeing the cell, as CONS_NIL is a
+   * special value that represents "the" empty list and should not be
+   * freed. If the cell is not CONS_NIL, assume it is safe to free the
+   * heap-allocated memory for that cell. This check prevents accidental
+   * deallocation of the CONS_NIL sentinel value; although, strictly
+   * speaking, the implementation can free(NULL) without causing
+   * undefined behavior.
+   */
   if (CONS_NOT_NIL_P(cell)) {
     free(cell);
   }

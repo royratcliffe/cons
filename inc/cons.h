@@ -21,7 +21,7 @@ struct cons;
 
 /*!
  * \brief The empty list (a \c NULL pointer).
- * \details Marks the end of a cons list.
+ * \details Sentinel constant marking the end of a cons list.
  *
  * The \c CONS_NIL macro represents "the" empty list of cons cells. It is defined
  * as a \c NULL pointer for easily checking for the end of a list. When creating a
