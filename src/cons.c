@@ -127,4 +127,8 @@ struct cons *cons_heap(void *car) {
   return cell;
 }
 
-void cons_free(struct cons *cell) { free(cell); }
+void cons_free(struct cons *cell) {
+  if (CONS_NOT_NIL_P(cell)) {
+    free(cell);
+  }
+}
