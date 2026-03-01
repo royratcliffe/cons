@@ -47,14 +47,16 @@ int test_append(int argc, char *argv[]) {
    * the first list's unused cell should remain unaffected.
    */
   {
-    struct cons cell2 = CONS((void *)2, CONS_NIL);
-    struct cons cell3 = CONS((void *)3, CONS_NIL);
+    struct cons *cell2 = cons_heap((void *)2);
+    struct cons *cell3 = cons_heap((void *)3);
     struct cons *head1 = CONS_NIL;
     struct cons *head2 = CONS_NIL;
-    cons(cons(&head2, &cell2), &cell3);
+    cons(cons(&head2, cell2), cell3);
     assert(cons_append(head1, head2) == head2);
-    assert(cons_cdr(&cell2) == &cell3);
-    assert(CONS_NIL_P(cons_cdr(&cell3)));
+    assert(cons_cdr(cell2) == cell3);
+    assert(CONS_NIL_P(cons_cdr(cell3)));
+    cons_free(cell2);
+    cons_free(cell3);
   }
 
   return EXIT_SUCCESS;
