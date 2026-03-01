@@ -1,8 +1,8 @@
 {
-    "testing.coverageToolbarEnabled": true,
     "cmake.coverageInfoFiles": [
         "${workspaceFolder}/build/coverage_filtered.info"
     ],
     "cmake.postRunCoverageTarget": "lcov",
+    "testing.coverageToolbarEnabled": true,
     "testing.defaultGutterClickAction": "runWithCoverage"
 }
