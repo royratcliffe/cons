@@ -95,3 +95,12 @@ struct cons *cons_nth(struct cons *cell, size_t nth) {
   }
   return cell;
 }
+
+struct cons *cons_member(struct cons *cell, void *car) {
+  for (; CONS_NOT_NIL_P(cell); cell = cons_cdr(cell)) {
+    if (cons_car(cell) == car) {
+      return cell;
+    }
+  }
+  return CONS_NIL;
+}
