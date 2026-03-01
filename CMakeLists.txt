@@ -35,9 +35,8 @@ create_test_sourcelist(test_sources
     test/member.c
 )
 
-# Add a test executable that links against the phase_align library.
+# Add a test executable that links against the library.
 # The test executable will be built from the test sources.
-# It will include the phase_align library and any necessary test files.
 add_executable(test_runner
     ${test_sources}
 )
