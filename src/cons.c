@@ -89,7 +89,7 @@ struct cons *cons_last(struct cons *cell) {
 }
 
 struct cons *cons_nth(struct cons *cell, size_t nth) {
-  while (CONS_NOT_NIL_P(cell) && nth > 0) {
+  while (CONS_NOT_NIL_P(cell) && nth != 0) {
     cell = cons_cdr(cell);
     nth--;
   }
