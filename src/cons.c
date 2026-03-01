@@ -78,8 +78,12 @@ struct cons *cons_last(struct cons *cell) {
   if (CONS_NIL_P(cell)) {
     return CONS_NIL;
   }
-  while (CONS_NOT_NIL_P(cons_cdr(cell))) {
-    cell = cons_cdr(cell);
+  /*
+   * The last cell in a list is the one having its cdr field equal to CONS_NIL.
+   */
+  struct cons *cdr;
+  while (CONS_NOT_NIL_P(cdr = cons_cdr(cell))) {
+    cell = cdr;
   }
   return cell;
 }
