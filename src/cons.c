@@ -104,3 +104,12 @@ struct cons *cons_member(struct cons *cell, void *car) {
   }
   return CONS_NIL;
 }
+
+struct cons *cons_append(struct cons *cell1, struct cons *cell2) {
+  struct cons *last = cons_last(cell1);
+  if (CONS_NIL_P(last)) {
+    return cell2;
+  }
+  cons_rplacd(last, cell2);
+  return cell1;
+}

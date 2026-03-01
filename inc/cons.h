@@ -225,6 +225,24 @@ struct cons *cons_nth(struct cons *cell, size_t nth);
  */
 struct cons *cons_member(struct cons *cell, void *car);
 
+/*!
+ * \brief Appends one list of cons cells to another.
+ * \param cell1 The first list to which the second list will be appended. This
+ * list will be modified to include the second list at its end.
+ * \param cell2 The second list to append to the first list. This list will not
+ * be modified, but its cells will be linked into the first list.
+ * \return Pointer to the head of the combined list, which is the same as
+ * \c cell1 if it is not empty, or \c cell2 if \c cell1 is empty.
+ * \details This function takes two lists of cons cells and appends the second
+ * list to the end of the first list. If the first list is empty (i.e., if
+ * \c cell1 is \c CONS_NIL), it simply returns \c cell2 as the new combined
+ * list. If the first list is not empty, it finds the last cell of the first
+ * list and updates its \c cdr pointer to point to the head of the second
+ * list, effectively linking the two lists together. The function then returns
+ * a pointer to the head of the combined list, which is the same as \c cell1.
+ */
+struct cons *cons_append(struct cons *cell1, struct cons *cell2);
+
 #ifdef __cplusplus
 }
 #endif
