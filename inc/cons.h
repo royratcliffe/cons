@@ -50,12 +50,13 @@ struct cons;
  * cons cell in the list, allowing for the construction of linked lists and
  * other complex data structures of arbitrary length.
  *
- * Why "cons"? The term "cons" is derived from the word "construct," as cons
- * cells are used to construct lists and other data structures. The \c cons
- * function is a fundamental operation in Lisp that creates a new cons cell,
- * allowing programmers to build complex data structures by linking cons cells
- * together. The name reflects the purpose of the data structure, which is to
- * construct and manipulate lists and other composite data types.
+ * Why "cons"? The term "cons" is derived from the word "construct," as
+ * cons cells are used to construct lists and other data structures. The
+ * \c cons function is a fundamental operation in Lisp that prepends an
+ * already-existing cons cell, allowing programmers to build complex
+ * data structures by linking cons cells together. The name reflects the
+ * purpose of the data structure, which is to construct and manipulate
+ * lists and other composite data types.
  *
  * What does CAR and CDR mean? CAR stands for "Contents of Address Register" and
  * CDR stands for "Contents of Decrement Register." These terms originate from
