@@ -32,6 +32,7 @@ create_test_sourcelist(test_sources
     test/cons.c
     test/nested_cons.c
     test/delete.c
+    test/member.c
 )
 
 # Add a test executable that links against the phase_align library.
@@ -45,6 +46,7 @@ target_link_libraries(test_runner cons)
 add_test(NAME cons COMMAND test_runner test/cons)
 add_test(NAME nested_cons COMMAND test_runner test/nested_cons)
 add_test(NAME delete COMMAND test_runner test/delete)
+add_test(NAME member COMMAND test_runner test/member)
 
 # https://cmake.org/cmake/help/latest/module/FindDoxygen.html
 # https://www.mcternan.me.uk/mscgen/
