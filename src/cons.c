@@ -57,10 +57,10 @@ void cons_reverse(struct cons **list) {
    */
   struct cons *reversed = CONS_NIL, *cell = *list;
   while (CONS_NOT_NIL_P(cell)) {
-    struct cons *cdr = cons_cdr(cell);
+    struct cons *tail = cons_cdr(cell);
     cons_rplacd(cell, reversed);
     reversed = cell;
-    cell = cdr;
+    cell = tail;
   }
   *list = reversed;
 }
@@ -81,9 +81,9 @@ struct cons *cons_last(struct cons *cell) {
   /*
    * The last cell in a list is the one having its cdr field equal to CONS_NIL.
    */
-  struct cons *cdr;
-  while (CONS_NOT_NIL_P(cdr = cons_cdr(cell))) {
-    cell = cdr;
+  struct cons *tail;
+  while (CONS_NOT_NIL_P(tail = cons_cdr(cell))) {
+    cell = tail;
   }
   return cell;
 }
