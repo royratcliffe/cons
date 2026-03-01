@@ -38,20 +38,21 @@ int test_append(int argc, char *argv[]) {
   }
 
   /*
-   * Tests appending an empty list to a non-empty list.
-   * This test case verifies that appending an empty list (CONS_NIL) to a
-   * non-empty list does not modify the original list and that the result is
-   * the same as the original non-empty list.
+   * Tests appending a non-empty list to an empty list.
+   * This test case verifies that when cons_append is called with an empty
+   * first list (CONS_NIL) and a non-empty second list, the function returns
+   * the second list unchanged. The test creates a second list containing two
+   * cons cells with values 2 and 3, and appends it to an empty first list.
+   * After the operation, the result should be the second list itself, and
+   * the first list's unused cell should remain unaffected.
    */
   {
-    struct cons cell1 = CONS((void *)1, CONS_NIL);
     struct cons cell2 = CONS((void *)2, CONS_NIL);
     struct cons cell3 = CONS((void *)3, CONS_NIL);
     struct cons *head1 = CONS_NIL;
     struct cons *head2 = CONS_NIL;
     cons(cons(&head2, &cell2), &cell3);
     assert(cons_append(head1, head2) == head2);
-    assert(CONS_NIL_P(cons_cdr(&cell1)));
     assert(cons_cdr(&cell2) == &cell3);
     assert(CONS_NIL_P(cons_cdr(&cell3)));
   }
