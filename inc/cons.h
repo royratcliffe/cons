@@ -163,6 +163,20 @@ struct cons **cons(struct cons **list, struct cons *cell);
 struct cons *cons_delete(struct cons **list, void *car);
 
 /*!
+ * \brief Destructively removes the specified cons cell from the list.
+  * \param list Pointer to the list head.
+  * \param cell The cons cell to remove from the list, matched by identity.
+  * \retval The removed cons cell if the specified cell was found and removed.
+  * \retval \c CONS_NIL if the specified cell was not found in the list.
+  * \details Traverses the list of cons cells, looking for the specified
+  * cell. If the cell is found, it is removed from the list by updating
+  * the \c cdr pointer of the previous cell (or the head pointer if the
+  * cell to remove is the first cell) to point to the next cell, thereby
+  * bypassing the removed cell.
+ */
+struct cons *cons_remove(struct cons **list, struct cons *cell);
+
+/*!
  * \brief Reverses a linked list of cons cells in place.
  * \details This function takes a pointer to the head of a linked list of cons
  * cells and reverses the order of the cells in the list. It iteratively

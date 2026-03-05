@@ -32,6 +32,7 @@ create_test_sourcelist(test_sources
     test/cons.c
     test/nested_cons.c
     test/delete.c
+    test/remove.c
     test/member.c
     test/append.c
 )
@@ -46,6 +47,7 @@ target_link_libraries(test_runner cons)
 add_test(NAME cons COMMAND test_runner test/cons)
 add_test(NAME nested_cons COMMAND test_runner test/nested_cons)
 add_test(NAME delete COMMAND test_runner test/delete)
+add_test(NAME remove COMMAND test_runner test/remove)
 add_test(NAME member COMMAND test_runner test/member)
 add_test(NAME append COMMAND test_runner test/append)
 
