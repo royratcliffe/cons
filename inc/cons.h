@@ -13,6 +13,11 @@
  */
 #include <stddef.h>
 
+/*
+ * for bool type
+ */
+#include <stdbool.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -139,6 +144,32 @@ static inline void cons_init(struct cons *cell, void *car) {
  * flexible and efficient manner.
  */
 struct cons **cons(struct cons **list, struct cons *cell);
+
+/*!
+ * \brief Loops through a list of cons cells, applying a predicate
+ * function to each cell.
+ * \param list Pointer to the list head to loop through. This is a
+ * pointer to a pointer to a cons cell.
+ * \param pred A predicate function that takes a pointer to the current
+ * list pointer, the current cons cell, and a user-defined pointer. The
+ * predicate should return \c true if the current cell matches the
+ * desired condition, and \c false otherwise.
+ * \param user A user-defined pointer that can be passed to the
+ * predicate function for additional context or data needed for the
+ * predicate's logic.
+ * \return Pointer to the list pointer of the first cons cell for which
+ * the predicate returns \c true, or \c NULL if no such cell is found.
+ * The returned pointer allows the caller to modify the list starting
+ * from the found cell if needed. If the predicate does not find a
+ * matching cell in the list, the function returns \c NULL to indicate
+ * that the search was unsuccessful. This design allows the function to
+ * signal the absence of a matching cell without returning a pointer to
+ * a cons cell, which would be misleading since it would suggest that a
+ * valid cell was found when in fact it was not. By returning \c NULL,
+ * the function provides a clear and unambiguous way to indicate that
+ * the search was unsuccessful.
+ */
+struct cons **cons_loop(struct cons **list, bool (*pred)(struct cons **list, struct cons *cell, void *user), void *user);
 
 /*!
  * \brief Destructively deletes the \e first cons cell with the specified \c car

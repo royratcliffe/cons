@@ -17,58 +17,66 @@
  */
 #include <stdlib.h>
 
+static bool cons_delete_p(struct cons **list, struct cons *cell, void *user);
+
+static bool cons_remove_p(struct cons **list, struct cons *cell, void *user);
+
 struct cons **cons(struct cons **list, struct cons *cell) {
   cons_rplacd(cell, *list);
   *list = cell;
   return &cell->cdr;
 }
 
-struct cons *cons_delete(struct cons **list, void *car) {
-  struct cons *deleted = CONS_NIL, *cell = *list;
-  while (CONS_NOT_NIL_P(cell)) {
-    if (cons_car(cell) == car) {
-      /*
-       * Found the cell to delete. If it's the head of the list, update the head
-       * pointer to the next cell. Otherwise, link the previous cell to the next
-       * cell, effectively removing the current cell from the list. Finally,
-       * return the deleted cell.
-       */
-      if (CONS_NIL_P(deleted)) {
-        *list = cons_cdr(cell);
-      } else {
-        cons_rplacd(deleted, cons_cdr(cell));
-      }
-      return cell;
+struct cons **cons_loop(struct cons **list, bool (*pred)(struct cons **list, struct cons *cell, void *user), void *user) {
+  for (struct cons *cell = *list; CONS_NOT_NIL_P(cell); list = &cell->cdr, cell = cons_cdr(cell)) {
+    if (pred(list, cell, user)) {
+      return list;
     }
-    deleted = cell;
-    cell = cons_cdr(cell);
   }
   /*
-   * If the cell is not found after traversing the entire list, return CONS_NIL
-   * to indicate that no deletion occurred.
+   * Returning NULL is correct. It is a NULL pointer to a pointer to a
+   * cons cell---a pointer to the head of a list. Therefore not itself a
+   * cons cell pointer. Returning NULL indicates that the predicate did
+   * not find a matching cell in the list, and thus there is no pointer
+   * to a cons cell that satisfies the predicate.
+   *
+   * This design allows the function to signal the absence of a matching
+   * cell without returning a pointer to a cons cell, which would be
+   * misleading since it would suggest that a valid cell was found when
+   * in fact it was not. By returning NULL, the function provides a
+   * unambiguous way to indicate that the search was unsuccessful.
    */
-  return CONS_NIL;
+  return NULL;
+}
+
+static bool cons_delete_p(struct cons **list, struct cons *cell, void *user) {
+  (void)list;
+  return cons_car(cell) == user;
+}
+
+struct cons *cons_delete(struct cons **list, void *car) {
+  struct cons **found = cons_loop(list, cons_delete_p, car);
+  if (found == NULL) {
+    return CONS_NIL;
+  }
+  struct cons *deleted = *found;
+  *found = cons_cdr(deleted);
+  return deleted;
+}
+
+static bool cons_remove_p(struct cons **list, struct cons *cell, void *user) {
+  (void)list;
+  return cell == user;
 }
 
 struct cons *cons_remove(struct cons **list, struct cons *cell) {
-  for (struct cons *prev = CONS_NIL, *curr = *list; CONS_NOT_NIL_P(curr); prev = curr, curr = cons_cdr(curr)) {
-    if (curr == cell) {
-      /*
-       * Found the cell to remove. If it's the head of the list, update the head
-       * pointer to the next cell. Otherwise, link the previous cell to the next
-       * cell, effectively removing the current cell from the list. This function
-       * returns the removed cell if the specified cell was found and removed,
-       * and \c CONS_NIL if the cell was not found in the list.
-       */
-      if (CONS_NIL_P(prev)) {
-        *list = cons_cdr(curr);
-      } else {
-        cons_rplacd(prev, cons_cdr(curr));
-      }
-      return curr;
-    }
+  struct cons **found = cons_loop(list, cons_remove_p, cell);
+  if (found == NULL) {
+    return CONS_NIL;
   }
-  return CONS_NIL;
+  struct cons *removed = *found;
+  *found = cons_cdr(removed);
+  return removed;
 }
 
 void cons_reverse(struct cons **list) {
