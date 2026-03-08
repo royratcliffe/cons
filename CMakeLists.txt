@@ -1,74 +1,49 @@
 cmake_minimum_required(VERSION 3.25)
 project(cons)
 
-add_library(cons src/cons.c)
+add_library(cons src/cons.c src/cons_node.c)
 target_include_directories(cons PUBLIC inc)
 
-# Coverage
-#
-# To enable code coverage, set the CMAKE_BUILD_TYPE to "Coverage" when
-# configuring the project:
-#
-#  cmake -DCMAKE_BUILD_TYPE=Coverage ..
-#
-# Only add coverage flags if we're building in Coverage mode.
-# This allows us to build in other modes (e.g., Debug, Release) without the
-# overhead of coverage instrumentation.
-#
-# --coverage is a shorthand for -fprofile-arcs -ftest-coverage, but include
-# them explicitly for clarity. Note: If you want to enable coverage in Debug
-# mode as well, you can modify the condition to include Debug builds.
-if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "Coverage")
-    target_compile_options(cons PRIVATE --coverage)
-    target_link_options(cons PRIVATE --coverage)
-endif()
-
+# Add a CTest executable for running all tests.
+# This will be used to run the tests defined in the test sources.
+# The test sources will be compiled into a test executable.
 include(CTest)
-enable_testing()
+create_test_sourcelist(test_sources
+    test_runner.c
+    test/cons.c
+    test/node.c
+    test/nested_cons.c
+    test/delete.c
+    test/remove.c
+    test/member.c
+    test/append.c
+)
 
-file(GLOB TestsToRun tests/*.c)
-set(TestNames)
-foreach(test_to_run ${TestsToRun})
-    get_filename_component(TestName ${test_to_run} NAME_WE)
-    if(NOT TestName MATCHES ".+_test$")
-        continue()
-    endif()
-    list(APPEND TestNames ${TestName})
-    add_test(NAME ${TestName} COMMAND test_cons ${TestName})
-endforeach()
-create_test_sourcelist(Tests test_driver.c ${TestNames})
+# Add a test executable that links against the library.
+# The test executable will be built from the test sources.
+add_executable(test_runner
+    ${test_sources}
+)
+target_link_libraries(test_runner cons)
 
-add_executable(test_cons test_driver.c ${TestsToRun})
-target_link_libraries(test_cons PRIVATE cons)
+add_test(NAME cons COMMAND test_runner test/cons)
+add_test(NAME node COMMAND test_runner test/node)
+add_test(NAME nested_cons COMMAND test_runner test/nested_cons)
+add_test(NAME delete COMMAND test_runner test/delete)
+add_test(NAME remove COMMAND test_runner test/remove)
+add_test(NAME member COMMAND test_runner test/member)
+add_test(NAME append COMMAND test_runner test/append)
 
-# Add coverage flags to test executable if building in Debug or Coverage mode
-if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "Coverage")
-    target_compile_options(test_cons PRIVATE -fprofile-arcs -ftest-coverage --coverage)
-    target_link_options(test_cons PRIVATE -fprofile-arcs -ftest-coverage --coverage)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(lcov)
+if(LCOV)
+    # Add the necessary compiler and linker flags to enable code coverage analysis.
+    # Use generator expressions so coverage is only enabled for Debug configuration,
+    # which works for both single- and multi-config generators.
+    foreach(target IN ITEMS cons test_runner)
+        target_compile_options(${target} PRIVATE $<$<CONFIG:Debug>:--coverage>)
+        target_link_options(${target} PRIVATE $<$<CONFIG:Debug>:--coverage>)
+    endforeach()
 endif()
-
-# Coverage target
-# To generate a coverage report, run the following command after building the project:
-# sudo apt install lcov genhtml
-add_custom_target(precoverage
-    COMMAND lcov --capture --directory . --output-file coverage.info
-    COMMAND lcov --remove coverage.info '/usr/*' '*/test*' --output-file coverage_filtered.info
-    DEPENDS test_cons
-)
-add_custom_target(coverage
-    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-    COMMAND lcov --capture --directory . --output-file coverage.info
-    COMMAND lcov --remove coverage.info '/usr/*' '*/test*' --output-file coverage_filtered.info
-    COMMAND genhtml coverage_filtered.info --output-directory coverage_report
-    COMMAND ${CMAKE_COMMAND} -E echo "Coverage report generated in: ${CMAKE_BINARY_DIR}/coverage_report/index.html"
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMENT "Running tests and generating coverage report..."
-    DEPENDS test_cons
-)
-add_custom_target(postcoverage
-    COMMAND genhtml coverage_filtered.info --output-directory coverage_report
-    COMMAND ${CMAKE_COMMAND} -E echo "Coverage report generated in: ${CMAKE_BINARY_DIR}/coverage_report/index.html"
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMENT "Running tests and generating coverage report..."
-    DEPENDS test_cons
-)
+include(doxy)
+include(cppcheck)
