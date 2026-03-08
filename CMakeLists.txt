@@ -43,7 +43,7 @@ create_test_sourcelist(test_sources
 add_executable(test_runner
     ${test_sources}
 )
-target_link_libraries(test_runner cons $<$<CONFIG:Debug>:gcov>)
+target_link_libraries(test_runner cons)
 
 add_test(NAME cons COMMAND test_runner test/cons)
 add_test(NAME node COMMAND test_runner test/node)
