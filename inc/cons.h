@@ -41,7 +41,7 @@ struct cons;
 /*! \brief Returns \c true if the cons cell is not \c CONS_NIL. */
 #define CONS_NOT_NIL_P(_cell) ((_cell) != CONS_NIL)
 
-/*! \brief Creates a new cons cell with the given \c car and \c cdr values. */
+/*! \brief Builds a cons cell with the given \c car and \c cdr values. */
 #define CONS(_car, _cdr) ((struct cons){.car = (_car), .cdr = (_cdr)})
 
 /*!
