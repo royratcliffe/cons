@@ -4,25 +4,6 @@ project(cons)
 add_library(cons src/cons.c src/cons_node.c)
 target_include_directories(cons PUBLIC inc)
 
-# Coverage
-#
-# To enable code coverage, set the CMAKE_BUILD_TYPE to "Coverage" when
-# configuring the project:
-#
-#  cmake -DCMAKE_BUILD_TYPE=Coverage ..
-#
-# Only add coverage flags if we're building in Coverage mode.
-# This allows us to build in other modes (e.g., Debug, Release) without the
-# overhead of coverage instrumentation.
-#
-# --coverage is a shorthand for -fprofile-arcs -ftest-coverage, but include
-# them explicitly for clarity. Note: If you want to enable coverage in Debug
-# mode as well, you can modify the condition to include Debug builds.
-if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "Coverage")
-    target_compile_options(cons PRIVATE --coverage)
-    target_link_options(cons PRIVATE --coverage)
-endif()
-
 # Add a CTest executable for running all tests.
 # This will be used to run the tests defined in the test sources.
 # The test sources will be compiled into a test executable.
