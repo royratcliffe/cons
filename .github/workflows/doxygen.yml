@@ -27,7 +27,7 @@ jobs:
       - name: Generate Documentation 🔧
         run: |
           cmake -S . -B build
-          cmake --build build --target doxy
+          cmake --build build --target cons_doxy
 
       - name: Deploy Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
