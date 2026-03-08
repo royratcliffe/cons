@@ -44,6 +44,9 @@ struct cons;
 /*! \brief Builds a cons cell with the given \c car and \c cdr values. */
 #define CONS(_car, _cdr) ((struct cons){.car = (_car), .cdr = (_cdr)})
 
+/*! \brief Builds a null cons cell structure. */
+#define CONS_NULL CONS(NULL, CONS_NIL)
+
 /*!
  * \brief Construct cell structure for building linked lists.
  * \details The \c car field holds data, the \c cdr field points to the next
