@@ -1,24 +1,21 @@
 # Cons---a C99 library for simple Lisp-like singly-linked lists
 
-Inspired by Lisp, "Cons" is a lightweight C99 library that provides a clean,
-efficient implementation of singly-linked lists. Designed for simplicity and
-performance, it offers essential operations for managing dynamic collections of
-data in C programs without the overhead of other dependencies.
+Inspired by Lisp, "Cons" is a lightweight C99 library that provides a clean, efficient implementation of singly-linked lists. Designed for simplicity and performance, it offers essential operations for managing dynamic collections of data in C programs without the overhead of other dependencies.
 
 ## Features
 
-* Singly-Linked Lists
+-   Singly-Linked Lists
 
-    -   Core data structure for efficient list management.
+    -   Core data structure for efficient list management
 
-* Simple API
+-   Simple API
 
-    -   Intuitive Lisp-like functions for list operations like `cons`, `cons_car`, and `cons_cdr`.
+    -   Intuitive Lisp-like functions for list operations like `cons`, `cons_car`, and `cons_cdr`
 
-* Documentation
+-   Dynamic Collections
 
-    -   Comprehensive API documentation generated with Doxygen.
+    -   Functions for constructing and modifying lists from caller-managed nodes; allocation and deallocation remain the caller's responsibility
 
-* Dynamic Memory Management
+-   Documentation
 
-    -   Functions for creating, modifying, and freeing lists.
+    -   Comprehensive API documentation generated with Doxygen
