@@ -1,0 +1,9 @@
+<map id="inc/cons_node.h" name="inc/cons_node.h">
+<area shape="rect" id="Node000001" title="Defines the structure and functions for cons nodes." alt="" coords="30,5,157,31"/>
+<area shape="rect" id="Node000002" href="$cons_8h.html" title="A simple implementation of cons cells for building linked lists." alt="" coords="61,79,125,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,31,96,65,91,65,91,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,80,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="87,106,61,142,57,139,83,103"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="104,152,187,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="104,103,131,139,127,142,100,106"/>
+</map>
