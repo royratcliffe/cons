@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 project(cons)
 
-add_library(cons src/cons.c)
+add_library(cons src/cons.c src/cons_node.c)
 target_include_directories(cons PUBLIC inc)
 
 # Coverage
@@ -30,6 +30,7 @@ include(CTest)
 create_test_sourcelist(test_sources
     test_runner.c
     test/cons.c
+    test/node.c
     test/nested_cons.c
     test/delete.c
     test/remove.c
@@ -45,6 +46,7 @@ add_executable(test_runner
 target_link_libraries(test_runner cons)
 
 add_test(NAME cons COMMAND test_runner test/cons)
+add_test(NAME node COMMAND test_runner test/node)
 add_test(NAME nested_cons COMMAND test_runner test/nested_cons)
 add_test(NAME delete COMMAND test_runner test/delete)
 add_test(NAME remove COMMAND test_runner test/remove)
