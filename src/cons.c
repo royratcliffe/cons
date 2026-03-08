@@ -27,6 +27,11 @@ struct cons **cons(struct cons **list, struct cons *cell) {
   return &cell->cdr;
 }
 
+struct cons **cons_prepend(struct cons **list, struct cons *cell) {
+  (void)cons(list, cell);
+  return list;
+}
+
 struct cons **cons_loop(struct cons **list, bool (*pred)(struct cons **list, struct cons *cell, void *user), void *user) {
   for (struct cons *cell = *list; CONS_NOT_NIL_P(cell); list = &cell->cdr, cell = cons_cdr(cell)) {
     if (pred(list, cell, user)) {

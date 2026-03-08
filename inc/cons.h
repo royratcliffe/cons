@@ -149,6 +149,18 @@ static inline void cons_init(struct cons *cell, void *car) {
 struct cons **cons(struct cons **list, struct cons *cell);
 
 /*!
+ * \brief Prepends a cons cell to a list, returning the updated list pointer.
+ * \param list Pointer to the list head to which the new cell will be
+ * prepended.
+ * \param cell The cons cell to prepend to the list.
+ * \return Pointer to the updated list pointer, now pointing to the new
+ * cell.
+ * \details A wrapper around \c cons that allows convenient chaining of
+ * cons cell additions without separately managing the list pointer.
+ */
+struct cons **cons_prepend(struct cons **list, struct cons *cell);
+
+/*!
  * \brief Loops through a list of cons cells, applying a predicate
  * function to each cell.
  * \param list Pointer to the list head to loop through. This is a
