@@ -49,6 +49,15 @@ struct cons **cons_loop(struct cons **list, bool (*pred)(struct cons **list, str
   return NULL;
 }
 
+static bool cons_find_p(struct cons **list, struct cons *cell, void *user) {
+  (void)list;
+  return cell == user;
+}
+
+struct cons **cons_find(struct cons **list, void *cell) {
+  return cons_loop(list, cons_find_p, cell);
+}
+
 static bool cons_delete_p(struct cons **list, struct cons *cell, void *user) {
   (void)list;
   return cons_car(cell) == user;
@@ -64,13 +73,8 @@ struct cons *cons_delete(struct cons **list, void *car) {
   return deleted;
 }
 
-static bool cons_remove_p(struct cons **list, struct cons *cell, void *user) {
-  (void)list;
-  return cell == user;
-}
-
 struct cons *cons_remove(struct cons **list, struct cons *cell) {
-  struct cons **found = cons_loop(list, cons_remove_p, cell);
+  struct cons **found = cons_find(list, cell);
   if (found == NULL) {
     return CONS_NIL;
   }

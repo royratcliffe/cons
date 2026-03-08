@@ -172,6 +172,16 @@ struct cons **cons(struct cons **list, struct cons *cell);
 struct cons **cons_loop(struct cons **list, bool (*pred)(struct cons **list, struct cons *cell, void *user), void *user);
 
 /*!
+ * \brief Finds the first cons cell in a list that matches a given identity.
+ * \param list Pointer to the list head to search through. This is a pointer
+ * to a pointer to a cons cell.
+ * \param cell The cons cell to find by identity.
+ * \return Pointer to the list pointer of the first cons cell that matches the
+ * specified identity, or \c NULL if no such cell is found.
+ */
+struct cons **cons_find(struct cons **list, void *cell);
+
+/*!
  * \brief Destructively deletes the \e first cons cell with the specified \c car
  * value from the list.
  * \param list Pointer to the list head.
