@@ -3,12 +3,12 @@
 /*!
  * \file cons.c
  * \brief Implementation of cons cell operations.
- * \details This file implements functions for manipulating cons cells, which
- * are fundamental data structures in Lisp-like languages. The functions link
- * caller-provided cons cells into lists, remove cells from a list, and reverse
- * a list of cons cells. The operations work with the structure defined in
- * \c cons.h to link and manipulate linked lists and other complex data
- * structures.
+ * \details This file implements functions for manipulating cons cells,
+ * which are fundamental data structures in Lisp-like languages. The
+ * functions link caller-provided cons cells into lists, remove cells
+ * from a list, and reverse a list of cons cells. The operations work
+ * with the structure defined in \c cons.h to link and manipulate linked
+ * lists and other complex data structures.
  */
 #include <cons.h>
 
