@@ -59,11 +59,16 @@ int test_node(int argc, char *argv[]) {
    */
   {
     struct cons_node node1 = CONS_NODE_NULL;
+    struct cons_node node2 = CONS_NODE_NULL;
+    struct cons_node node3 = CONS_NODE_NULL;
+    (void)cons_node(&node1, &node2);
+    (void)cons_node(&node3, &node2);
 
     assert(cons_node(&node1, &node1) == &node1);
-    assert(cons_car_node(&node1) == NULL);
+    assert(cons_car_node(&node1) == &node2);
     assert(cons_cdr_node(&node1) == NULL);
-    assert(cons_sub_node(&node1) == NULL);
+    assert(cons_sub_node(&node2) == &node3);
+    assert(cons_cdr_node(&node3) == &node1);
   }
 
   return EXIT_SUCCESS;
