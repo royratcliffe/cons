@@ -60,7 +60,7 @@ int test_node(int argc, char *argv[]) {
   {
     struct cons_node node1 = CONS_NODE_NULL;
 
-    assert(cons_node(&node1, &node1) == NULL);
+    assert(cons_node(&node1, &node1) == &node1);
     assert(cons_car_node(&node1) == NULL);
     assert(cons_cdr_node(&node1) == NULL);
     assert(cons_sub_node(&node1) == NULL);
