@@ -325,34 +325,41 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="cons__node_8c_source.html#l00045">45</a> of file <a class="el" href="cons__node_8c_source.html">cons_node.c</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   45</span>                                                                            {</div>
-<div class="line"><span class="lineno">   46</span>  <span class="keyword">struct </span><a class="code hl_struct" href="structcons__node.html">cons_node</a> *car = <a class="code hl_function" href="cons__node_8c.html#a43e71f6a1d1412124183f8186ec750cb">cons_car_node</a>(sub);</div>
-<div class="line"><span class="lineno">   47</span>  <span class="keywordflow">if</span> (car != NULL) {</div>
-<div class="line"><span class="lineno">   48</span>    <span class="comment">/*</span></div>
-<div class="line"><span class="lineno">   49</span><span class="comment">     * The sub-node already has a super-node. Remove the sub-node from</span></div>
-<div class="line"><span class="lineno">   50</span><span class="comment">     * the list of sub-nodes of the current super-node. Remove it even</span></div>
-<div class="line"><span class="lineno">   51</span><span class="comment">     * if the current super-node is the same as the new super-node,</span></div>
-<div class="line"><span class="lineno">   52</span><span class="comment">     * because the sub-node may be in a different position in the list</span></div>
-<div class="line"><span class="lineno">   53</span><span class="comment">     * of sub-nodes of the new super-node when re-constructing the same</span></div>
-<div class="line"><span class="lineno">   54</span><span class="comment">     * sub-super linkage.</span></div>
-<div class="line"><span class="lineno">   55</span><span class="comment">     */</span></div>
-<div class="line"><span class="lineno">   56</span>    (void)<a class="code hl_function" href="cons_8h.html#aa9b9c91eb615f35070f944c8b44b1b4c">cons_remove</a>(&amp;car-&gt;<a class="code hl_variable" href="structcons__node.html#a00746467c19bcf6c281617b961ebcb51">head</a>, &amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>);</div>
-<div class="line"><span class="lineno">   57</span>    <a class="code hl_function" href="cons_8h.html#abbbc88d92157d77d2217ec63fe0aefa6">cons_rplaca</a>(&amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>, NULL);</div>
-<div class="line"><span class="lineno">   58</span>  }</div>
-<div class="line"><span class="lineno">   59</span>  <span class="keywordflow">if</span> (super != NULL) {</div>
-<div class="line"><span class="lineno">   60</span>    <span class="comment">/*</span></div>
-<div class="line"><span class="lineno">   61</span><span class="comment">     * The new super-node is not NULL. Prepend the sub-node to the list</span></div>
-<div class="line"><span class="lineno">   62</span><span class="comment">     * of sub-nodes of the new super-node. Set the car field of the</span></div>
-<div class="line"><span class="lineno">   63</span><span class="comment">     * sub-node to point to the new super-node.</span></div>
-<div class="line"><span class="lineno">   64</span><span class="comment">     *</span></div>
-<div class="line"><span class="lineno">   65</span><span class="comment">     * This could be redundant if the sub-node is already a sub-node of</span></div>
-<div class="line"><span class="lineno">   66</span><span class="comment">     * the new super-node, but it is simpler to just do it</span></div>
-<div class="line"><span class="lineno">   67</span><span class="comment">     * unconditionally than to check for that case.</span></div>
-<div class="line"><span class="lineno">   68</span><span class="comment">     */</span></div>
-<div class="line"><span class="lineno">   69</span>    (void)<a class="code hl_struct" href="structcons.html">cons</a>(&amp;super-&gt;<a class="code hl_variable" href="structcons__node.html#a00746467c19bcf6c281617b961ebcb51">head</a>, &amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>);</div>
-<div class="line"><span class="lineno">   70</span>    <a class="code hl_function" href="cons_8h.html#abbbc88d92157d77d2217ec63fe0aefa6">cons_rplaca</a>(&amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>, super);</div>
-<div class="line"><span class="lineno">   71</span>  }</div>
-<div class="line"><span class="lineno">   72</span>  <span class="keywordflow">return</span> super;</div>
-<div class="line"><span class="lineno">   73</span>}</div>
+<div class="line"><span class="lineno">   46</span>  <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">   47</span><span class="comment">   * Prevent a node from being its own super-node. Avoids creating a cycle in</span></div>
+<div class="line"><span class="lineno">   48</span><span class="comment">   * the tree, which would lead to undefined behaviour when traversing. If the</span></div>
+<div class="line"><span class="lineno">   49</span><span class="comment">   * sub-node is the same as the super-node, the function returns NULL and does</span></div>
+<div class="line"><span class="lineno">   50</span><span class="comment">   * not modify the tree structure.</span></div>
+<div class="line"><span class="lineno">   51</span><span class="comment">   */</span></div>
+<div class="line"><span class="lineno">   52</span>  <span class="keywordflow">if</span> (sub == super) <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno">   53</span>  <span class="keyword">struct </span><a class="code hl_struct" href="structcons__node.html">cons_node</a> *car = <a class="code hl_function" href="cons__node_8c.html#a43e71f6a1d1412124183f8186ec750cb">cons_car_node</a>(sub);</div>
+<div class="line"><span class="lineno">   54</span>  <span class="keywordflow">if</span> (car != NULL) {</div>
+<div class="line"><span class="lineno">   55</span>    <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">   56</span><span class="comment">     * The sub-node already has a super-node. Remove the sub-node from</span></div>
+<div class="line"><span class="lineno">   57</span><span class="comment">     * the list of sub-nodes of the current super-node. Remove it even</span></div>
+<div class="line"><span class="lineno">   58</span><span class="comment">     * if the current super-node is the same as the new super-node,</span></div>
+<div class="line"><span class="lineno">   59</span><span class="comment">     * because the sub-node may be in a different position in the list</span></div>
+<div class="line"><span class="lineno">   60</span><span class="comment">     * of sub-nodes of the new super-node when re-constructing the same</span></div>
+<div class="line"><span class="lineno">   61</span><span class="comment">     * sub-super linkage.</span></div>
+<div class="line"><span class="lineno">   62</span><span class="comment">     */</span></div>
+<div class="line"><span class="lineno">   63</span>    (void)<a class="code hl_function" href="cons_8h.html#aa9b9c91eb615f35070f944c8b44b1b4c">cons_remove</a>(&amp;car-&gt;<a class="code hl_variable" href="structcons__node.html#a00746467c19bcf6c281617b961ebcb51">head</a>, &amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>);</div>
+<div class="line"><span class="lineno">   64</span>    <a class="code hl_function" href="cons_8h.html#abbbc88d92157d77d2217ec63fe0aefa6">cons_rplaca</a>(&amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>, NULL);</div>
+<div class="line"><span class="lineno">   65</span>  }</div>
+<div class="line"><span class="lineno">   66</span>  <span class="keywordflow">if</span> (super != NULL) {</div>
+<div class="line"><span class="lineno">   67</span>    <span class="comment">/*</span></div>
+<div class="line"><span class="lineno">   68</span><span class="comment">     * The new super-node is not NULL. Prepend the sub-node to the list</span></div>
+<div class="line"><span class="lineno">   69</span><span class="comment">     * of sub-nodes of the new super-node. Set the car field of the</span></div>
+<div class="line"><span class="lineno">   70</span><span class="comment">     * sub-node to point to the new super-node.</span></div>
+<div class="line"><span class="lineno">   71</span><span class="comment">     *</span></div>
+<div class="line"><span class="lineno">   72</span><span class="comment">     * This could be redundant if the sub-node is already a sub-node of</span></div>
+<div class="line"><span class="lineno">   73</span><span class="comment">     * the new super-node, but it is simpler to just do it</span></div>
+<div class="line"><span class="lineno">   74</span><span class="comment">     * unconditionally than to check for that case.</span></div>
+<div class="line"><span class="lineno">   75</span><span class="comment">     */</span></div>
+<div class="line"><span class="lineno">   76</span>    (void)<a class="code hl_struct" href="structcons.html">cons</a>(&amp;super-&gt;<a class="code hl_variable" href="structcons__node.html#a00746467c19bcf6c281617b961ebcb51">head</a>, &amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>);</div>
+<div class="line"><span class="lineno">   77</span>    <a class="code hl_function" href="cons_8h.html#abbbc88d92157d77d2217ec63fe0aefa6">cons_rplaca</a>(&amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>, super);</div>
+<div class="line"><span class="lineno">   78</span>  }</div>
+<div class="line"><span class="lineno">   79</span>  <span class="keywordflow">return</span> super;</div>
+<div class="line"><span class="lineno">   80</span>}</div>
 <div class="ttc" id="acons_8h_html_aa9b9c91eb615f35070f944c8b44b1b4c"><div class="ttname"><a href="cons_8h.html#aa9b9c91eb615f35070f944c8b44b1b4c">cons_remove</a></div><div class="ttdeci">struct cons * cons_remove(struct cons **list, struct cons *cell)</div><div class="ttdoc">Destructively removes the specified cons cell from the list.</div><div class="ttdef"><b>Definition</b> <a href="src_2cons_8c_source.html#l00081">cons.c:81</a></div></div>
 <div class="ttc" id="acons_8h_html_abbbc88d92157d77d2217ec63fe0aefa6"><div class="ttname"><a href="cons_8h.html#abbbc88d92157d77d2217ec63fe0aefa6">cons_rplaca</a></div><div class="ttdeci">static void cons_rplaca(struct cons *cell, void *car)</div><div class="ttdoc">Mutator for the car field of a cons cell.</div><div class="ttdef"><b>Definition</b> <a href="cons_8h_source.html#l00111">cons.h:111</a></div></div>
 <div class="ttc" id="acons__node_8c_html_a43e71f6a1d1412124183f8186ec750cb"><div class="ttname"><a href="cons__node_8c.html#a43e71f6a1d1412124183f8186ec750cb">cons_car_node</a></div><div class="ttdeci">struct cons_node * cons_car_node(struct cons_node *node)</div><div class="ttdoc">Accessor for the parent node (super-node) of a cons node.</div><div class="ttdef"><b>Definition</b> <a href="cons__node_8c_source.html#l00036">cons_node.c:36</a></div></div>
