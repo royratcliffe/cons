@@ -59,7 +59,7 @@ int test_cons(int argc, char *argv[]) {
     assert(head1 == &cell3);
     assert(cons_cdr(&cell3) == &cell2);
     assert(cons_cdr(&cell2) == &cell1);
-    assert(cons_cdr(&cell1) == CONS_NIL);
+    assert(CONS_NIL_P(cons_cdr(&cell1)));
   }
 
   return EXIT_SUCCESS;
