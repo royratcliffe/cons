@@ -124,40 +124,42 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> */</span></div>
 <div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="cons__node_8h.html#ac9610bf748fb6fdaa1be3c8dcad7eae8">   45</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structcons__node.html">cons_node</a> *<a class="code hl_struct" href="structcons__node.html">cons_node</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structcons__node.html">cons_node</a> *sub, <span class="keyword">struct</span> <a class="code hl_struct" href="structcons__node.html">cons_node</a> *super) {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keyword">struct </span><a class="code hl_struct" href="structcons__node.html">cons_node</a> *car = <a class="code hl_function" href="cons__node_8c.html#a43e71f6a1d1412124183f8186ec750cb">cons_car_node</a>(sub);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keywordflow">if</span> (car != NULL) {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="comment">/*</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">     * The sub-node already has a super-node. Remove the sub-node from</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">     * the list of sub-nodes of the current super-node. Remove it even</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">     * if the current super-node is the same as the new super-node,</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">     * because the sub-node may be in a different position in the list</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">     * of sub-nodes of the new super-node when re-constructing the same</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">     * sub-super linkage.</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    (void)<a class="code hl_function" href="cons_8h.html#aa9b9c91eb615f35070f944c8b44b1b4c">cons_remove</a>(&amp;car-&gt;<a class="code hl_variable" href="structcons__node.html#a00746467c19bcf6c281617b961ebcb51">head</a>, &amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_function" href="cons_8h.html#abbbc88d92157d77d2217ec63fe0aefa6">cons_rplaca</a>(&amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>, NULL);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  }</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="comment">/*</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">   * Prevent a node from being its own super-node. Avoids creating a</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">   * cycle in the tree, which would lead to undefined behaviour when</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">   * traversing. If the sub-node is the same as the super-node, the</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">   * function does not modify the tree structure.</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordflow">if</span> (super != NULL &amp;&amp; super != sub) {</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="comment">/*</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">     * The new super-node is not NULL. Prepend the sub-node to the list</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">     * of sub-nodes of the new super-node. Set the car field of the</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">     * sub-node to point to the new super-node.</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">     * This could be redundant if the sub-node is already a sub-node of</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">     * the new super-node, but it is simpler to just do it</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">     * unconditionally than to check for that case.</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    (void)<a class="code hl_struct" href="structcons.html">cons</a>(&amp;super-&gt;<a class="code hl_variable" href="structcons__node.html#a00746467c19bcf6c281617b961ebcb51">head</a>, &amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <a class="code hl_function" href="cons_8h.html#abbbc88d92157d77d2217ec63fe0aefa6">cons_rplaca</a>(&amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>, super);</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  }</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keywordflow">return</span> super;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>}</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="comment">/*</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">   * Prevent a node from being its own super-node. Avoids creating a</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">   * cycle in the tree, which would lead to undefined behaviour when</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">   * traversing. If the sub-node is the same as the super-node, the</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">   * function does not modify the tree structure.</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">   */</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keywordflow">if</span> (sub == super)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">return</span> super;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keyword">struct </span><a class="code hl_struct" href="structcons__node.html">cons_node</a> *car = <a class="code hl_function" href="cons__node_8c.html#a43e71f6a1d1412124183f8186ec750cb">cons_car_node</a>(sub);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keywordflow">if</span> (car != NULL) {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="comment">/*</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">     * The sub-node already has a super-node. Remove the sub-node from</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">     * the list of sub-nodes of the current super-node. Remove it even</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">     * if the current super-node is the same as the new super-node,</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">     * because the sub-node may be in a different position in the list</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">     * of sub-nodes of the new super-node when re-constructing the same</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">     * sub-super linkage.</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    (void)<a class="code hl_function" href="cons_8h.html#aa9b9c91eb615f35070f944c8b44b1b4c">cons_remove</a>(&amp;car-&gt;<a class="code hl_variable" href="structcons__node.html#a00746467c19bcf6c281617b961ebcb51">head</a>, &amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_function" href="cons_8h.html#abbbc88d92157d77d2217ec63fe0aefa6">cons_rplaca</a>(&amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>, NULL);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordflow">if</span> (super != NULL) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="comment">/*</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">     * The new super-node is not NULL. Prepend the sub-node to the list</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">     * of sub-nodes of the new super-node. Set the car field of the</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">     * sub-node to point to the new super-node.</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">     * This could be redundant if the sub-node is already a sub-node of</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">     * the new super-node, but it is simpler to just do it</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">     * unconditionally than to check for that case.</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    (void)<a class="code hl_struct" href="structcons.html">cons</a>(&amp;super-&gt;<a class="code hl_variable" href="structcons__node.html#a00746467c19bcf6c281617b961ebcb51">head</a>, &amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <a class="code hl_function" href="cons_8h.html#abbbc88d92157d77d2217ec63fe0aefa6">cons_rplaca</a>(&amp;sub-&gt;<a class="code hl_variable" href="structcons__node.html#a6244baaa11841accd4e6f3f42010f813">cell</a>, super);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keywordflow">return</span> super;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>}</div>
 </div>
 <div class="ttc" id="acons_8h_html_a10cda4b483e1965b6e1ec61e626562f5"><div class="ttname"><a href="cons_8h.html#a10cda4b483e1965b6e1ec61e626562f5">cons_cdr</a></div><div class="ttdeci">static struct cons * cons_cdr(const struct cons *cell)</div><div class="ttdoc">Accessor for the cdr field of a cons cell.</div><div class="ttdef"><b>Definition</b> <a href="cons_8h_source.html#l00104">cons.h:104</a></div></div>
 <div class="ttc" id="acons_8h_html_a62c1102f8d3a95142868edf2e43fc680"><div class="ttname"><a href="cons_8h.html#a62c1102f8d3a95142868edf2e43fc680">cons_car</a></div><div class="ttdeci">static void * cons_car(const struct cons *cell)</div><div class="ttdoc">Accessor for the car field of a cons cell.</div><div class="ttdef"><b>Definition</b> <a href="cons_8h_source.html#l00097">cons.h:97</a></div></div>

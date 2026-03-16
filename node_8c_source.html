@@ -149,15 +149,20 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">   */</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  {</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structcons__node.html">cons_node</a> node1 = <a class="code hl_define" href="cons__node_8h.html#ad321399e449ce14f5792fecc82d78f34">CONS_NODE_NULL</a>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    assert(<a class="code hl_struct" href="structcons__node.html">cons_node</a>(&amp;node1, &amp;node1) == &amp;node1);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    assert(<a class="code hl_function" href="cons__node_8h.html#a43e71f6a1d1412124183f8186ec750cb">cons_car_node</a>(&amp;node1) == NULL);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    assert(<a class="code hl_function" href="cons__node_8h.html#a76da56d08778111c57f83547765254a7">cons_cdr_node</a>(&amp;node1) == NULL);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    assert(<a class="code hl_function" href="cons__node_8h.html#ab1101ea74e840af48be71dbe6c5a01c7">cons_sub_node</a>(&amp;node1) == NULL);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  }</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structcons__node.html">cons_node</a> node2 = <a class="code hl_define" href="cons__node_8h.html#ad321399e449ce14f5792fecc82d78f34">CONS_NODE_NULL</a>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structcons__node.html">cons_node</a> node3 = <a class="code hl_define" href="cons__node_8h.html#ad321399e449ce14f5792fecc82d78f34">CONS_NODE_NULL</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    (void)<a class="code hl_struct" href="structcons__node.html">cons_node</a>(&amp;node1, &amp;node2);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    (void)<a class="code hl_struct" href="structcons__node.html">cons_node</a>(&amp;node3, &amp;node2);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    assert(<a class="code hl_struct" href="structcons__node.html">cons_node</a>(&amp;node1, &amp;node1) == &amp;node1);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    assert(<a class="code hl_function" href="cons__node_8h.html#a43e71f6a1d1412124183f8186ec750cb">cons_car_node</a>(&amp;node1) == &amp;node2);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    assert(<a class="code hl_function" href="cons__node_8h.html#a76da56d08778111c57f83547765254a7">cons_cdr_node</a>(&amp;node1) == NULL);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    assert(<a class="code hl_function" href="cons__node_8h.html#ab1101ea74e840af48be71dbe6c5a01c7">cons_sub_node</a>(&amp;node2) == &amp;node3);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    assert(<a class="code hl_function" href="cons__node_8h.html#a76da56d08778111c57f83547765254a7">cons_cdr_node</a>(&amp;node3) == &amp;node1);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  }</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
 <div class="ttc" id="acons__node_8h_html"><div class="ttname"><a href="cons__node_8h.html">cons_node.h</a></div><div class="ttdoc">Defines the structure and functions for cons nodes.</div></div>
 <div class="ttc" id="acons__node_8h_html_a43e71f6a1d1412124183f8186ec750cb"><div class="ttname"><a href="cons__node_8h.html#a43e71f6a1d1412124183f8186ec750cb">cons_car_node</a></div><div class="ttdeci">struct cons_node * cons_car_node(struct cons_node *node)</div><div class="ttdoc">Accessor for the parent node (super-node) of a cons node.</div><div class="ttdef"><b>Definition</b> <a href="cons__node_8c_source.html#l00036">cons_node.c:36</a></div></div>
 <div class="ttc" id="acons__node_8h_html_a76da56d08778111c57f83547765254a7"><div class="ttname"><a href="cons__node_8h.html#a76da56d08778111c57f83547765254a7">cons_cdr_node</a></div><div class="ttdeci">struct cons_node * cons_cdr_node(struct cons_node *node)</div><div class="ttdoc">Accessor for the next sibling node of a cons node.</div><div class="ttdef"><b>Definition</b> <a href="cons__node_8c_source.html#l00038">cons_node.c:38</a></div></div>
