@@ -50,5 +50,17 @@ int test_cons(int argc, char *argv[]) {
     assert(CONS_NIL_P(cons_cdr(&cell3)));
   }
 
+  {
+    struct cons cell1 = CONS((void *)1, CONS_NIL);
+    struct cons cell2 = CONS((void *)2, CONS_NIL);
+    struct cons cell3 = CONS((void *)3, CONS_NIL);
+    struct cons *head1 = CONS_NIL;
+    cons_prepend(cons_prepend(cons_prepend(&head1, &cell1), &cell2), &cell3);
+    assert(head1 == &cell3);
+    assert(cons_cdr(&cell3) == &cell2);
+    assert(cons_cdr(&cell2) == &cell1);
+    assert(cons_cdr(&cell1) == CONS_NIL);
+  }
+
   return EXIT_SUCCESS;
 }
