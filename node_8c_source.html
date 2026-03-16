@@ -150,7 +150,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  {</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structcons__node.html">cons_node</a> node1 = <a class="code hl_define" href="cons__node_8h.html#ad321399e449ce14f5792fecc82d78f34">CONS_NODE_NULL</a>;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    assert(<a class="code hl_struct" href="structcons__node.html">cons_node</a>(&amp;node1, &amp;node1) == NULL);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    assert(<a class="code hl_struct" href="structcons__node.html">cons_node</a>(&amp;node1, &amp;node1) == &amp;node1);</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    assert(<a class="code hl_function" href="cons__node_8h.html#a43e71f6a1d1412124183f8186ec750cb">cons_car_node</a>(&amp;node1) == NULL);</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    assert(<a class="code hl_function" href="cons__node_8h.html#a76da56d08778111c57f83547765254a7">cons_cdr_node</a>(&amp;node1) == NULL);</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    assert(<a class="code hl_function" href="cons__node_8h.html#ab1101ea74e840af48be71dbe6c5a01c7">cons_sub_node</a>(&amp;node1) == NULL);</div>
