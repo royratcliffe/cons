@@ -8,6 +8,10 @@ Inspired by Lisp, "Cons" is a lightweight C99 library that provides a clean, eff
 
     -   Core data structure for efficient list management
 
+-   Hierarchical Nodes
+
+    -   Support for nested lists, allowing for complex data structures
+
 -   Simple API
 
     -   Intuitive Lisp-like functions for list operations like `cons`, `cons_car`, and `cons_cdr`
