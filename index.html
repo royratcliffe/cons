@@ -100,10 +100,30 @@ Features</h1>
 </ul>
 </li>
 <li>Documentation<ul>
-<li>Comprehensive API documentation generated with Doxygen </li>
+<li>Comprehensive API documentation generated with Doxygen</li>
 </ul>
 </li>
 </ul>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Usage</h1>
+<p>To use the Cons library, include the header file and link against the compiled library in your C project. The API provides functions for constructing and manipulating lists, as well as traversing and modifying hierarchical node structures.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="cons_8h.html">cons.h</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">void</span>) {</div>
+<div class="line">    <span class="keyword">struct </span><a class="code hl_struct" href="structcons.html">cons</a> cell1 = <a class="code hl_define" href="cons_8h.html#add3cd465bb5a172cb54bcab2f936a1bd">CONS</a>((<span class="keywordtype">void</span> *)1, <a class="code hl_define" href="cons_8h.html#a3da75391f439d089b6567ae4f973a8a7">CONS_NIL</a>);</div>
+<div class="line">    <span class="keyword">struct </span><a class="code hl_struct" href="structcons.html">cons</a> cell2 = <a class="code hl_define" href="cons_8h.html#add3cd465bb5a172cb54bcab2f936a1bd">CONS</a>((<span class="keywordtype">void</span> *)2, <a class="code hl_define" href="cons_8h.html#a3da75391f439d089b6567ae4f973a8a7">CONS_NIL</a>);</div>
+<div class="line">    <span class="keyword">struct </span><a class="code hl_struct" href="structcons.html">cons</a> *head = <a class="code hl_define" href="cons_8h.html#a3da75391f439d089b6567ae4f973a8a7">CONS_NIL</a>;</div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_struct" href="structcons.html">cons</a>(&amp;head, &amp;cell1);</div>
+<div class="line">    <a class="code hl_struct" href="structcons.html">cons</a>(&amp;head, &amp;cell2);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="acons_8h_html"><div class="ttname"><a href="cons_8h.html">cons.h</a></div><div class="ttdoc">A simple implementation of cons cells for building linked lists.</div></div>
+<div class="ttc" id="acons_8h_html_a3da75391f439d089b6567ae4f973a8a7"><div class="ttname"><a href="cons_8h.html#a3da75391f439d089b6567ae4f973a8a7">CONS_NIL</a></div><div class="ttdeci">#define CONS_NIL</div><div class="ttdoc">The empty list (a NULL pointer).</div><div class="ttdef"><b>Definition</b> <a href="cons_8h_source.html#l00036">cons.h:36</a></div></div>
+<div class="ttc" id="acons_8h_html_add3cd465bb5a172cb54bcab2f936a1bd"><div class="ttname"><a href="cons_8h.html#add3cd465bb5a172cb54bcab2f936a1bd">CONS</a></div><div class="ttdeci">#define CONS(_car, _cdr)</div><div class="ttdoc">Builds a cons cell with the given car and cdr values.</div><div class="ttdef"><b>Definition</b> <a href="cons_8h_source.html#l00045">cons.h:45</a></div></div>
+<div class="ttc" id="astructcons_html"><div class="ttname"><a href="structcons.html">cons</a></div><div class="ttdoc">Construct cell structure for building linked lists.</div><div class="ttdef"><b>Definition</b> <a href="cons_8h_source.html#l00073">cons.h:73</a></div></div>
+</div><!-- fragment --><p>What does this code do? It constructs two cons cells, <code>cell1</code> and <code>cell2</code>, with values <code>1</code> and <code>2</code> respectively. It then constructs a list by prepending these cells to the <code>head</code> pointer, resulting in a list that contains both cells. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
