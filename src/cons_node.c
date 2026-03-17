@@ -43,6 +43,14 @@ struct cons_node *cons_sub_node(struct cons_node *node) { return node_from_cell(
  * Constructs a tree of nodes.
  */
 struct cons_node *cons_node(struct cons_node *sub, struct cons_node *super) {
+  /*
+   * Prevent a node from being its own super-node. Avoids creating a
+   * cycle in the tree, which would lead to undefined behaviour when
+   * traversing. If the sub-node is the same as the super-node, the
+   * function does not modify the tree structure.
+   */
+  if (sub == super)
+    return super;
   struct cons_node *car = cons_car_node(sub);
   if (car != NULL) {
     /*
